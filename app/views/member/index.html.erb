@@ -1,0 +1,8 @@
+<% unless member_signed_in? -%>
+  <p><%= link_to 'Sign up as User', new_member_registration_path %></p>
+  <p><%= link_to 'Sign in as User', new_member_session_path %></p>
+<% end -%>
+
+<% if member_signed_in? -%>
+  <p>Logged in</p>
+<% end -%>
