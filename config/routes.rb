@@ -1,7 +1,6 @@
 TawaCricketClub::Application.routes.draw do
+  get "home/index"
   devise_for :members
-
-  get '/token' => 'member#token', as: :token
 
   resources :member, only: :index
 
