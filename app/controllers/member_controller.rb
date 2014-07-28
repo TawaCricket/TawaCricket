@@ -1,5 +1,7 @@
 class MemberController < ApplicationController
-	before_action :authenticate_member!, only: :token
-	def token
+	before_action :authenticate_member!
+
+	def index
 	end
+
 end

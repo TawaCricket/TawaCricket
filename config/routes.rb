@@ -1,9 +1,7 @@
 TawaCricketClub::Application.routes.draw do
   devise_for :members
 
-  get '/token' => 'member#token', as: :token
-
-  resources :member, only: :index
+  resources :member
 
   root 'member#index'
   # The priority is based upon order of creation: first created -> highest priority.
