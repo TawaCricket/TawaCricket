@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+#menu-user-links {
+    float: right;
+    padding-top: 10px;
+    input[type="text"] {
+		height: 10px;
+		width: 20px;
+	}
+}

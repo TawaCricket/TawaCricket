@@ -20,9 +20,11 @@
           <li><%= link_to "TawaCricket", root_path %></li>
           <li><%= link_to "Register", new_member_registration_path %></li>
           <li><%= link_to 'Sign in', new_member_session_path %></li>
+        </ul>
+        <ul  class="nav" id="menu-user-links">
         <li>
          <% if member_signed_in? -%>
-            <div id="user_login_box" style="float:right">
+            <div id="user_login_box">
           <%= current_member.email %> |
           <%= link_to 'My info', edit_member_registration_path %> |
           <%= link_to 'Sign out', destroy_member_session_path, method: :delete %>
@@ -31,10 +33,10 @@
         </li> 
         <li>         
         <% if !member_signed_in? -%>
-        <div id="user_login_box" style="float:right">
-          <%= form_for("member", :url => member_session_path) do |f| %>
-          <%= f.text_field :email, :placeholder => 'email' %>
-          <%= f.password_field :password, :placeholder => 'password' %>
+          <div id="user_login_box">
+           <%= form_for("member", :url => member_session_path) do |f| %>
+           <%= f.text_field :email, :placeholder => 'email' %>
+            <%= f.password_field :password, :placeholder => 'password' %>
            <%= f.submit 'Sign in' %>
          </div>
         <%end%>
