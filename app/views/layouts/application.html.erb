@@ -7,7 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="container">
+  <div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><%= link_to "TawaCricket", root_path %></li>
+          <li><%= link_to "Register", new_member_registration_path %></li>
+          <li><%= link_to 'Sign in', new_member_session_path %></li>
+          <li><div class="container">
       <% if member_signed_in? -%>
         <div id="user_login_box" style="float:right">
           <%= current_member.email %> |
@@ -19,10 +32,24 @@
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String) %>
       <%- end -%>
+<<<<<<< Updated upstream
 
       <p><%= link_to 'Home', root_path %></p>
       <div style="clear:both"></div>
       <%= yield %>
+=======
+      
+    </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="container">
+    
+      <div style="clear:both"></div> 
+      <%= yield %> 
+>>>>>>> Stashed changes
     </div>
   </body>
 </html>
