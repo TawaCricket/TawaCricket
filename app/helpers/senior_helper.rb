@@ -1,0 +1,2 @@
+module SeniorHelper
+end

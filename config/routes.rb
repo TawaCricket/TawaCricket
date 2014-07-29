@@ -4,6 +4,10 @@ TawaCricketClub::Application.routes.draw do
 
   resources :member
 
+  resources :junior
+
+  resources :senior
+
   root 'member#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
