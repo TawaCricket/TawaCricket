@@ -32,13 +32,10 @@
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String) %>
       <%- end -%>
-<<<<<<< Updated upstream
 
       <p><%= link_to 'Home', root_path %></p>
       <div style="clear:both"></div>
-      <%= yield %>
-=======
-      
+      <%= yield %>      
     </li>
           </ul>
       </div>
@@ -49,7 +46,6 @@
     
       <div style="clear:both"></div> 
       <%= yield %> 
->>>>>>> Stashed changes
     </div>
   </body>
 </html>
