@@ -20,34 +20,28 @@
           <li><%= link_to "TawaCricket", root_path %></li>
           <li><%= link_to "Register", new_member_registration_path %></li>
           <li><%= link_to 'Sign in', new_member_session_path %></li>
-          <li><div class="container">
-
-      <% if member_signed_in? -%>
-        <div id="user_login_box" style="float:right">
+        <li>
+         <% if member_signed_in? -%>
+            <div id="user_login_box" style="float:right">
           <%= current_member.email %> |
           <%= link_to 'My info', edit_member_registration_path %> |
           <%= link_to 'Sign out', destroy_member_session_path, method: :delete %>
-        </div>
-      <% end -%> 
-      </div>                
-    </li>
-          </ul>
-      </div>
-      </div>
-      <% if !member_signed_in? -%>
-      <div class="nav-collapse" style="float:right">
-        <ul class="nav">
-        <li><%= form_for("member", :url => member_session_path) do |f| %></li>
-        <li><%= f.text_field :email, :placeholder => 'email' %></li>
-        <li><%= f.password_field :password, :placeholder => 'password' %></li>
-        <li><%= f.check_box :remember_me %>
-        <%= f.label :remember_me %></li>
-        <li><%= f.submit 'Sign in' %>
-        <%= link_to "Forgot your password?", new_password_path('member') %></li>
+            </div>
+          <% end -%>                       
+        </li> 
+        <li>         
+        <% if !member_signed_in? -%>
+        <div id="user_login_box" style="float:right">
+          <%= form_for("member", :url => member_session_path) do |f| %>
+          <%= f.text_field :email, :placeholder => 'email' %>
+          <%= f.password_field :password, :placeholder => 'password' %>
+           <%= f.submit 'Sign in' %>
+         </div>
+        <%end%>
+        <%end%>
+      </li>
         </ul>
-        <%end%>
-        <%end%>
-    </div>
+      </div>
   </div>
 </div>
 <div>
