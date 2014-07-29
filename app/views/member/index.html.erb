@@ -1,8 +1,24 @@
-<% unless member_signed_in? -%>
-  <p><%= link_to 'Sign up as User', new_member_registration_path %></p>
-  <p><%= link_to 'Sign in as User', new_member_session_path %></p>
-<% end -%>
-
-<% if member_signed_in? -%>
-  <p>Logged in</p>
-<% end -%>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TawaCricketClub</title>
+<%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="span9">
+    	<h1>Tawa Cricket Club</h1>
+    </div>
+    <div class="span3">
+      <h2>About Us</h2>
+      <p></p>        
+    </div>
+  </div>
+</div>
+</body>
+</body>
+</head>
+</html>
