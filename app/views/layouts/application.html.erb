@@ -28,14 +28,9 @@
           <%= link_to 'My info', edit_member_registration_path %> |
           <%= link_to 'Sign out', destroy_member_session_path, method: :delete %>
         </div>
-      <% end -%>
-
-
-      <%- flash.each do |name, msg| -%>
-        <%= content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String) %>
-      <%- end -%>
-
-          </li>
+      <% end -%> 
+      </div>                
+    </li>
           </ul>
       </div>
       </div>
@@ -55,8 +50,11 @@
     </div>
   </div>
 </div>
+<div>
   <div class="container">
-    
+    <%- flash.each do |name, msg| -%>
+        <%= content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String) %>
+      <%- end -%>  
       <div style="clear:both"></div> 
       <%= yield %> 
     </div>
