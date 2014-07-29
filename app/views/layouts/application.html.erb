@@ -21,28 +21,33 @@
           <li><%= link_to "Register", new_member_registration_path %></li>
           <li><%= link_to 'Sign in', new_member_session_path %></li>
         </ul>
-        <ul  class="nav" id="menu-user-links">
-        <li>
+        
          <% if member_signed_in? -%>
-            <div id="user_login_box">
+         <ul class="nav" style="float:right; height:40px;">
+         <li>
+           <div id="user_login_box" style="float:right; padding-top:10px;">
           <%= current_member.email %> |
           <%= link_to 'My info', edit_member_registration_path %> |
           <%= link_to 'Sign out', destroy_member_session_path, method: :delete %>
-            </div>
-          <% end -%>                       
-        </li> 
-        <li>         
+        </div>
+           </li> 
+            </ul>
+          <% end -%>  
+         
+                                           
         <% if !member_signed_in? -%>
-          <div id="user_login_box">
+         <ul class="nav" style="float:right; height:40px; padding-top:10px; "> 
+            <li> 
            <%= form_for("member", :url => member_session_path) do |f| %>
            <%= f.text_field :email, :placeholder => 'email', class: "input-small" %>
             <%= f.password_field :password, :placeholder => 'password', class: "input-small" %>
-           <%= f.submit 'Sign in' %>
-         </div>
+           <%= f.submit 'Sign in', class: "btn btn-mini", style:"margin-top:0px;" %>
         <%end%>
+              </li>
+               </ul>
         <%end%>
-      </li>
-        </ul>
+
+       
       </div>
   </div>
 </div>
