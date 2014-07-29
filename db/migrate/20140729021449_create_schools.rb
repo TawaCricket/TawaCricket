@@ -1,7 +1,7 @@
 class CreateSchools < ActiveRecord::Migration
   def change
     create_table :schools do |t|
-      t.string :junior_id, null: false, default: ""
+      t.integer :junior_id, null: false, default: 0
       t.timestamps
     end
   end

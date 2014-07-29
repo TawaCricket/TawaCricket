@@ -6,6 +6,7 @@ class Member < ActiveRecord::Base
 
   has_many :juniors
   has_one :senior
+  has_one :volunteer
 
   has_many :comments
   
