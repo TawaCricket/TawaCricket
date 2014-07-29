@@ -31,11 +31,7 @@
 
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String) %>
-      <%- end -%>
-
-      <p><%= link_to 'Home', root_path %></p>
-      <div style="clear:both"></div>
-      <%= yield %>      
+      <%- end -%>     
     </li>
           </ul>
       </div>
