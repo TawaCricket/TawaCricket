@@ -9,15 +9,12 @@
 </head>
 
 <body>
+  
+<div id="page-wrap">
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
      <div class="container">
-       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-       </a>
-       <div class="nav-collapse">
+       <div>
          <ul class="nav nav-bar-height center-nav ">
            <li><%= link_to "TawaCricket", root_path %></li>
            <li><%= link_to "Register", new_member_registration_path %></li>
@@ -47,7 +44,6 @@
     </div>
   </div>
 </div>
-<div>
   <div class="container">
     <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String) %>
@@ -55,5 +51,9 @@
       <div style="clear:both"></div> 
       <%= yield %> 
     </div>
+  </div>
+  <div id ="bg">
+    <%= image_tag("bg.jpg", :alt => "backgroup image") %>
+  </div>
   </body>
 </html>

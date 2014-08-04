@@ -228,6 +228,7 @@ body {
   line-height: 20px;
   color: #333333;
   background-color: #ffffff;
+  width: 1100;
 }
 
 a {
@@ -289,7 +290,7 @@ a:focus {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 940px;
+  width: 900px;
 }
 
 .span12 {
@@ -4569,7 +4570,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 940px;
+  width: 900px;
 }
 
 .navbar-fixed-top {

@@ -17,18 +17,13 @@ ActiveRecord::Schema.define(version: 20140729023705) do
   enable_extension "plpgsql"
 
   create_table "comments", force: true do |t|
-    t.integer  "member_id",  default: 0, null: false
+    t.string   "member_id",  default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "juniors", force: true do |t|
-    t.integer  "member_id",  default: 0,  null: false
-    t.string   "first_name", default: "", null: false
-    t.string   "last_name",  default: "", null: false
-    t.string   "address"
-    t.string   "email"
-    t.integer  "age"
+    t.string   "member_id",  default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,7 +34,6 @@ ActiveRecord::Schema.define(version: 20140729023705) do
     t.string   "first_name",             default: "", null: false
     t.string   "last_name",              default: "", null: false
     t.string   "phone",                  default: "", null: false
-    t.boolean  "volunteer"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -56,15 +50,13 @@ ActiveRecord::Schema.define(version: 20140729023705) do
   add_index "members", ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true, using: :btree
 
   create_table "schools", force: true do |t|
-    t.integer  "junior_id",  default: 0, null: false
+    t.string   "junior_id",  default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "seniors", force: true do |t|
-    t.integer  "member_id",  default: 0, null: false
-    t.string   "position"
-    t.integer  "grade"
+    t.string   "member_id",  default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
