@@ -1,6 +1,6 @@
 TawaCricketClub::Application.routes.draw do
  
-  devise_for :members
+  devise_for :members ,:controllers => { :registrations => "registrations" }
 
   resources :member
 

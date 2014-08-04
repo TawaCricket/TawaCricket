@@ -7,7 +7,6 @@ class CreateJuniors < ActiveRecord::Migration
       t.string :address
       t.string :email
       t.string :gender
-      t.string :email
       t.integer :age
       t.date :dob
       t.string :school

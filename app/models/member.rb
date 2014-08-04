@@ -4,8 +4,8 @@ class Member < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable;
 
-  has_many :juniors
-  has_one :senior
+  has_many :juniors, :class_name => 'Junior', :foreign_key => :member_id
+  has_one :senior, :class_name => 'Senior', :foreign_key => :member_id
   has_one :volunteer
 
   has_many :comments
