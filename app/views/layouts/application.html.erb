@@ -9,6 +9,8 @@
 </head>
 
 <body>
+  
+<div id="page-wrap">
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
      <div class="container">
@@ -42,7 +44,6 @@
     </div>
   </div>
 </div>
-<div>
   <div class="container">
     <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String) %>
@@ -50,5 +51,9 @@
       <div style="clear:both"></div> 
       <%= yield %> 
     </div>
+  </div>
+  <div id ="bg">
+    <%= image_tag("bg.jpg", :alt => "backgroup image") %>
+  </div>
   </body>
 </html>
