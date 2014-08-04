@@ -6,7 +6,8 @@ class DeviseCreateMembers < ActiveRecord::Migration
       t.string :encrypted_password, null: false, default: ""
       t.string :first_name,         null: false, default: ""
       t.string :last_name,          null: false, default: ""
-      t.string :phone,              null: false, default: ""
+      t.string :phone
+      t.string :mobile
       t.boolean :volunteer
 
       ## Recoverable

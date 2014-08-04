@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+
+.nav-bar-height li {height:50px;}
+
+.center-nav li {
+  position: relative;
+  top: 30px;
+  transform: translateY(-50%);
+}

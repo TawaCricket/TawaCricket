@@ -19,6 +19,12 @@
     <%= f.password_field :current_password, autocomplete: "off" %></div>
 
   <div><%= f.submit "Update" %></div>
+  <div>
+    <%= f.fields_for :seniors do |builder| %>
+      <%= render 'senior/senior_fields', :f => builder %> <br />
+    <% end %>
+  </div>
+
 <% end %>
 
 <h3>Cancel my account</h3>

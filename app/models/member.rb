@@ -9,5 +9,10 @@ class Member < ActiveRecord::Base
   has_one :volunteer
 
   has_many :comments
+
+  accepts_nested_attributes_for :juniors, allow_destroy: true, :reject_if => :all_blank
+  accepts_nested_attributes_for :senior, allow_destroy: true, :reject_if => :all_blank
+  accepts_nested_attributes_for :volunteer, allow_destroy: true, :reject_if => :all_blank
+  accepts_nested_attributes_for :comments, allow_destroy: true, :reject_if => :all_blank
   
 end

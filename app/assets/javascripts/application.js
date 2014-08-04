@@ -12,6 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.sticky
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+$(document).ready(function(){
+    $("#sticker").sticky({topSpacing:0});
+
+    $('form').on('click', '.add_fields', (event), function(){
+        time = new Date().getTime();
+        regexp = new RegExp($(this).data('id'), 'g');
+        $(this).before($(this).data('fields').replace(regexp, time))
+        event.preventDefault();
+    });
+    
+ });

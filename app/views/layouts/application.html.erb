@@ -1,54 +1,50 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>TawaCricketClub</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
   <div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li><%= link_to "TawaCricket", root_path %></li>
-          <li><%= link_to "Register", new_member_registration_path %></li>
-          <li><%= link_to 'Sign in', new_member_session_path %></li>
-        </ul>
-        
-         <% if member_signed_in? -%>
-         <ul class="nav" style="float:right; height:40px;">
+    <div class="navbar-inner">
+     <div class="container">
+       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </a>
+       <div class="nav-collapse">
+         <ul class="nav nav-bar-height center-nav ">
+           <li><%= link_to "TawaCricket", root_path %></li>
+           <li><%= link_to "Register", new_member_registration_path %></li>
+           <li><%= link_to 'Sign in', new_member_session_path %></li>
+         </ul>
+         <ul class="nav nav-bar-height center-nav" style="float:right">
          <li>
-           <div id="user_login_box" style="float:right; padding-top:10px;">
-          <%= current_member.email %> |
-          <%= link_to 'My info', edit_member_registration_path %> |
-          <%= link_to 'Sign out', destroy_member_session_path, method: :delete %>
-        </div>
-           </li> 
-            </ul>
-          <% end -%>  
-         
-                                           
-        <% if !member_signed_in? -%>
-         <ul class="nav" style="float:right; height:40px; padding-top:10px; "> 
-            <li> 
-           <%= form_for("member", :url => member_session_path) do |f| %>
-           <%= f.text_field :email, :placeholder => 'email', class: "input-small" %>
+          <% if member_signed_in? -%>
+            <div id="user_login_box" style="float:right; margin-top:4%;">
+             <%= current_member.email %> |
+             <%= link_to 'My info', edit_member_registration_path %> |
+             <%= link_to 'Sign out', destroy_member_session_path, method: :delete %>
+           </div>
+         <% end -%>                          
+         <% if !member_signed_in? -%>
+            <div style="margin-top:2%;">
+            <%= form_for("member", :url => member_session_path) do |f| %>
+            <%= f.text_field :email, :placeholder => 'email', class: "input-small" %>
             <%= f.password_field :password, :placeholder => 'password', class: "input-small" %>
-           <%= f.submit 'Sign in', class: "btn btn-mini", style:"margin-top:0px;" %>
-        <%end%>
-              </li>
-               </ul>
-        <%end%>
-
-       
+            <%= f.submit 'Sign in', class: "btn btn-mini", style: "margin-bottom:6%"%>
+            </div>
+         <% end -%>
+         <% end -%>
+         </li> 
+       </ul>
       </div>
+    </div>
   </div>
 </div>
 <div>
