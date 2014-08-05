@@ -1,12 +1,13 @@
 TawaCricketClub::Application.routes.draw do
+  resources :image_tables
+
+  resources :images
+
   get "home/index"
   devise_for :members
 
   resources :member, only: :index
-  resources :gallary
-
   root 'member#index'
-  get "gallary/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
