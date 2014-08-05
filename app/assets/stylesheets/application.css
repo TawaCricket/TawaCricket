@@ -38,6 +38,34 @@
     }
     
     #page-wrap { position: relative; z-index: 2; width: 1100px; margin: 50px auto; 
-    	padding: 20px; background: white; opacity: 0.85; -moz-box-shadow: 0 0 20px black;
+    	padding: 20px; background: white; opacity: 0.92; -moz-box-shadow: 0 0 20px black;
     	 -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black; }
     p { font: 15px/2 Georgia, Serif; margin: 0 0 30px 0; text-indent: 40px; }
+
+  
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #999;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}

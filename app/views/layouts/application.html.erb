@@ -11,38 +11,8 @@
 <body>
   
 <div id="page-wrap">
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-     <div class="container">
-       <div>
-         <ul class="nav nav-bar-height center-nav ">
-           <li><%= link_to "TawaCricket", root_path %></li>
-           <li><%= link_to "Register", new_member_registration_path %></li>
-           <li><%= link_to 'Sign in', new_member_session_path %></li>
-         </ul>
-         <ul class="nav nav-bar-height center-nav" style="float:right">
-         <li>
-          <% if member_signed_in? -%>
-            <div id="user_login_box" style="float:right; margin-top:4%;">
-             <%= current_member.email %> |
-             <%= link_to 'My info', edit_member_registration_path %> |
-             <%= link_to 'Sign out', destroy_member_session_path, method: :delete %>
-           </div>
-         <% end -%>                          
-         <% if !member_signed_in? -%>
-            <div style="margin-top:2%;">
-            <%= form_for("member", :url => member_session_path) do |f| %>
-            <%= f.text_field :email, :placeholder => 'email', class: "input-small" %>
-            <%= f.password_field :password, :placeholder => 'password', class: "input-small" %>
-            <%= f.submit 'Sign in', class: "btn btn-mini", style: "margin-bottom:6%"%>
-            </div>
-         <% end -%>
-         <% end -%>
-         </li> 
-       </ul>
-      </div>
-    </div>
-  </div>
+  <div>
+   <%= render 'layouts/header' %>
 </div>
   <div class="container">
     <%- flash.each do |name, msg| -%>
@@ -51,9 +21,12 @@
       <div style="clear:both"></div> 
       <%= yield %> 
     </div>
+        <%= render 'layouts/footer' %>
   </div>
   <div id ="bg">
     <%= image_tag("bg.jpg", :alt => "backgroup image") %>
   </div>
+   
+
   </body>
 </html>

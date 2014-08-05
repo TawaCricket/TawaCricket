@@ -16,6 +16,8 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+	= require animate.css
+
 $(document).ready(function(){
     $("#sticker").sticky({topSpacing:0});
 
