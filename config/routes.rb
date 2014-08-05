@@ -1,14 +1,16 @@
 TawaCricketClub::Application.routes.draw do
  
-  devise_for :members ,:controllers => { :registrations => "registrations" }
+  devise_for :members
 
-  resources :member
+  resources :members
 
-  resources :junior
+  resources :juniors
 
-  resources :senior
+  resources :seniors
 
   root 'member#index'
+
+  match 'juniors/create' => 'juniors#create', :via => [:post]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

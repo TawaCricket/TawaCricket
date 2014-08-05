@@ -1,4 +1,4 @@
-<fieldset>
+<%= form_for @junior, :id => 'junior_form' do |f|%>
 <table>
   <tr>
   	<td><%= f.label :first_name, "First name"%></td> </br>
@@ -17,20 +17,10 @@
   	<td><%= f.text_field :email, required: true, placeholder: "Email"%></td>
   </tr>
   <tr>
-  	<td><%= f.label :gender, "Gender"%></td>
-  	<td><%= f.text_field :gender, required: true, placeholder: "Gender"%></td>
-  </tr>
-  <tr>
   	<td><%= f.label :age, "Age"%></td>
   	<td><%= f.text_field :age, required: true, placeholder: "Age"%></td>
   </tr>
-  <tr>
-  	<td><%= f.label :dob, "Date of birth"%></td>
-  	<td><%= f.date_select :dob, required: true %></td>
-  </tr>
-  <tr>
-  	<td><%= f.label :school, "School"%></td>
-  	<td><%= f.text_field :school, required: true, placeholder: "School"%></td>
-  </tr>
 </table>
-</fieldset>
+<button id="save">add junior</button>
+<% end %>
+

@@ -16,14 +16,49 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
 $(document).ready(function(){
-    $("#sticker").sticky({topSpacing:0});
+    $("#sticker").sticky({topSpacing:0})
+	$('#save').on('click', function(e) {
+		console.log($('form').serialize());
+  		var formData = $('form').serialize();
+  		$.ajax('/juniors/create', {
+  			type: 'POST',
+  			dataType: "JSON",
+    		data: formData,
+    		success:function(data, textStatus, jqXHR) 
+        	{
+        		alert('success');
+            	//data: return data from server
+        	},
+        	error: function(jqXHR, textStatus, errorThrown) 
+        	{
+        		alert('failure');
+            	//if fails      
+        	}
+  		})
+  		/*
+  		$.ajax({
+    		type: 'POST',
+    		url: '#new',
+    		data: formData,
+    		dataType: 'JSON',
+    		success:function(data, textStatus, jqXHR) 
+        	{
+        		alert('success');
+            	//data: return data from server
+        	},
+        	error: function(jqXHR, textStatus, errorThrown) 
+        	{
+        		alert('failure');
+            	//if fails      
+        	}
+  		})
+*/
+  		e.preventDefault();
+  		return false;
+	});
+});
 
-    $(document).on('click', '.add_fields', (event), function(){
-        time = new Date().getTime();
-        regexp = new RegExp($(this).data('id'), 'g');
-        $(this).before($(this).data('fields').replace(regexp, time))
-        event.preventDefault();
-    });
 
- });
+
