@@ -1,5 +1,5 @@
-<h1>Images#gallerysdjfsdjf</h1>
-<p>Find me in app/views/images/gallery.html.erb</p>
+<h1>Gallery</h1>
+
 <table>
 
 <% @images.each do |img| %>
@@ -7,4 +7,7 @@
 	<td><%= image_tag img.pic.url %></td>
   </tr>
 <% end %>
+
+<br>
+<%= link_to 'Upload Image', new_image_path %>
 </table>
