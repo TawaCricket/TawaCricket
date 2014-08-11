@@ -8,8 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
-  
+<body>  
 <div id="page-wrap">
   <div>
    <%= render 'layouts/header' %>
@@ -21,12 +20,10 @@
       <div style="clear:both"></div> 
       <%= yield %> 
     </div>
-        <%= render 'layouts/footer' %>
   </div>
   <div id ="bg">
     <%= image_tag("bg.jpg", :alt => "backgroup image") %>
   </div>
-   
-
   </body>
+  
 </html>
