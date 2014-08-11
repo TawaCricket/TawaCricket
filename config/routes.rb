@@ -1,4 +1,5 @@
 TawaCricketClub::Application.routes.draw do
+
  
   devise_for :members
 
@@ -8,6 +9,13 @@ TawaCricketClub::Application.routes.draw do
 
   resources :seniors
 
+  resources :image_tables
+
+  resources :images
+
+  get "home/index"
+
+  resources :member, only: :index
   root 'member#index'
 
   match 'juniors/create' => 'juniors#create', :via => [:post]
