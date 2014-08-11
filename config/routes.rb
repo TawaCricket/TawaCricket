@@ -1,5 +1,4 @@
 TawaCricketClub::Application.routes.draw do
-
  
   devise_for :members
 
@@ -8,6 +7,8 @@ TawaCricketClub::Application.routes.draw do
   resources :juniors
 
   resources :seniors
+
+  get "images/gallery"
 
   resources :image_tables
 

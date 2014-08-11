@@ -12,6 +12,10 @@ class ImagesController < ApplicationController
   def show
   end
 
+  def gallery
+    @images = Image.all
+  end
+
   # GET /images/new
   def new
     @image = Image.new
