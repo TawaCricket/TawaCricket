@@ -4,7 +4,7 @@
 
 <% @images.each do |img| %>
   <tr>
-	<td><%= img.img_name %></td>
+	<td><%= image_tag img.pic.url %></td>
   </tr>
 <% end %>
 </table>
