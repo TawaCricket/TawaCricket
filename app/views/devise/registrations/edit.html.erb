@@ -27,3 +27,63 @@
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+
+<div id="new-junior"></div>
+
+<button id="save-junior">add junior</button>
+<button id="load-junior">load junior form</button>
+
+<script style="text/javascript">
+$(document).ready(function(){
+  $('#load-junior').show();
+  $('#save-junior').hide();
+
+  $("#sticker").sticky({topSpacing:0})
+
+  $('#save-junior').on('click', function(e) {
+    var formData = $('#new_junior').serialize();
+    $.ajax('<%= juniors_create_path %>', {
+      type: 'POST',
+      dataType: "JSON",
+      data: formData,
+      success:function(data, textStatus, jqXHR) 
+        {
+          $('#load-junior').show();
+          $('#save-junior').hide();
+
+          alert('success'); //data: return data from server
+          
+        },
+      error: function(jqXHR, textStatus, errorThrown) 
+        {
+          alert('failure'); //if fails      
+        }
+    })
+    e.preventDefault();
+    return false;
+  });
+
+  $('#load-junior').on('click', function(e) {
+
+    var data;
+    $.ajax({
+      type: "GET",
+      url: '/juniors/new_form',
+      dataType: "JSON",
+      success: function(data) {
+        console.log('success');
+        $('#save-junior').show();
+        $('#load-junior').hide();
+        $('#new-junior').append(data);
+      },
+      error: function(data){
+        $('#save-junior').show();
+        $('#load-junior').hide();
+        $('#new-junior').append(data.responseText);
+      }
+    });
+    e.preventDefault();
+    return false;
+  });
+});
+</script>
