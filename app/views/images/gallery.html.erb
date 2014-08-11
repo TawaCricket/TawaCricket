@@ -1,0 +1,10 @@
+<h1>Images#gallerysdjfsdjf</h1>
+<p>Find me in app/views/images/gallery.html.erb</p>
+<table>
+
+<% @images.each do |img| %>
+  <tr>
+	<td><%= image_tag img.pic.url %></td>
+  </tr>
+<% end %>
+</table>

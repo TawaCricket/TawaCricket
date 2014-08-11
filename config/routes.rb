@@ -14,6 +14,9 @@ TawaCricketClub::Application.routes.draw do
 
   resources :seniors
 
+  get "images/gallery"
+
+
   resources :image_tables
 
   resources :images
