@@ -1,4 +1,5 @@
 TawaCricketClub::Application.routes.draw do
+  get "images/gallery"
   resources :image_tables
 
   resources :images
