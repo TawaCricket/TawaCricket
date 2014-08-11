@@ -1,4 +1,5 @@
 TawaCricketClub::Application.routes.draw do
+
  
 
  get '/juniors/new_form' => "juniors#new_form"
@@ -13,11 +14,16 @@ TawaCricketClub::Application.routes.draw do
 
   resources :seniors
 
+  resources :image_tables
+
+  resources :images
+
+  get "home/index"
+
   root 'member#index'
 
   match 'juniors/create' => 'juniors#create', :via => [:post]
-  match 'registrations/update' => 'registrations#update', :via => [:patch]
-  match 'registrations/update' => 'registrations#update', :via => [:post]
+
 
 
 
