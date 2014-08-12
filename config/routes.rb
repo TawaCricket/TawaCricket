@@ -2,7 +2,9 @@ TawaCricketClub::Application.routes.draw do
 
  
 
- get '/juniors/new_form' => "juniors#new_form"
+  get '/juniors/new_form' => "juniors#new_form"
+  get '/senior/new_form' => "senior#new_form"
+
 
   devise_for :members
 
@@ -26,6 +28,7 @@ TawaCricketClub::Application.routes.draw do
   root 'member#index'
 
   match 'juniors/create' => 'juniors#create', :via => [:post]
+  match 'senior/create' => 'senior#create', :via => [:post]
 
 
 
