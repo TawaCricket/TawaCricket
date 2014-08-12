@@ -1,13 +1,80 @@
+<style type="text/css">
+
+.gallerycontainer{
+position: relative;
+width:1000px;
+
+/*Add a height attribute and set to largest image's height to prevent overlaying*/
+}
+
+.thumbnail img{
+border: 1px solid white;
+margin: 0 5px 5px 0;
+}
+
+.thumbnail:hover{
+background-color: transparent;
+}
+
+.thumbnail:hover img{
+border: 1px solid blue;
+}
+
+.thumbnail span{ /*CSS for enlarged image*/
+position: absolute;
+padding: 5px;
+left: -1000px;
+visibility: hidden;
+color: black;
+text-decoration: none;
+width: 700px;
+height: 400px;
+
+}
+
+.thumbnail span img{ /*CSS for enlarged image*/
+border-width: 0;
+padding: 2px;
+width: 700px;
+height: 400px;
+}
+
+.thumbnail:hover span{ /*CSS for enlarged image*/
+visibility: visible;
+top: 0;
+left: 200px; /*position where enlarged image should offset horizontally */
+z-index: 50;
+width: 700px;
+height: 400px;
+}
+
+</style>
 <h1>Gallery</h1>
 
-<table>
+<div class="gallerycontainer">
 
-<% @images.each do |img| %>
-  <tr>
-	<td><%= image_tag img.pic.url %></td>
-  </tr>
+<table id = "myTable">
+<% @images.in_groups_of(3,false).each do |group| %>
+	<tr>
+		<% group.each do |img| %>
+			<td> 
+				<a class="thumbnail" href="#thumb"><%= image_tag img.pic.url, :style=>  'width:300px;height:300px'%><span><%= image_tag img.pic.url %> </span></a>
+			</td>
+		<%end%>
+	</tr>
 <% end %>
+</table>
 
-<br>
+
+
+
+
+
+
+
+
+</div>
+
+<table>
 <%= link_to 'Upload Image', new_image_path %>
 </table>
