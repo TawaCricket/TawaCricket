@@ -4,4 +4,8 @@ class MemberController < ApplicationController
 	def index
 		@member = current_member
 	end
+	def show
+		@member = current_member
+	end
+
 end
