@@ -26,11 +26,23 @@ class JuniorsController < ApplicationController
 	end
 
 	def new_form
-		@junior = Junior.where(:member_id => current_member.id).first
-		if @junior.nil?
-			@junior = Junior.new
-		end
+		@junior = Junior.new
   		render :partial => 'form', :layout => false
+	end
+
+	def update_form
+		@juniors = Junior.where(:junior_id => @junior.id)
+		render :partial => 'form', :layout => false
+	end
+
+	def get_juniors
+		@juniors = Junior.where(:member_id => current_member.id)
+		render :partial => 'junior_table', :layout => false
+	end
+
+	def get_all_juniors
+		@juniors = Junior.all
+		render :partial => 'junior_table', :layout => false
 	end
 
 	def destroy

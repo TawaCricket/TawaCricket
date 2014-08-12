@@ -42,11 +42,13 @@ $(document).ready(function(){
 
   $('#save-junior').on('click', function(e) {
     var formData = $('#new_junior').serialize();
-    $.ajax('<%= juniors_create_path %>', {
-      type: 'POST',
-      dataType: "JSON",
-      data: formData,
-      success:function(data, textStatus, jqXHR) 
+    alert($('#new_junior').valid());
+    if($('#new_junior').valid()){
+      $.ajax('<%= juniors_create_path %>', {
+        type: 'POST',
+        dataType: "JSON",
+        data: formData,
+        success: function(data, textStatus, jqXHR) 
         {
           $('#load-junior').show();
           $('#save-junior').hide();
@@ -54,11 +56,12 @@ $(document).ready(function(){
           alert('success'); //data: return data from server
           
         },
-      error: function(jqXHR, textStatus, errorThrown) 
+        error: function(jqXHR, textStatus, errorThrown) 
         {
           alert('failure'); //if fails      
         }
-    })
+      });
+    }
     e.preventDefault();
     return false;
   });
@@ -80,6 +83,18 @@ $(document).ready(function(){
         $('#save-junior').show();
         $('#load-junior').hide();
         $('#new-junior').append(data.responseText);
+
+        $('#new_junior').validate({
+      debug: true,
+      rules: {
+        "junior[first_name]": {required: true, maxlength: 20},
+        "junior[last_name]": {required: true, maxlength: 20},
+        "junior[address]": {required:true},
+        "junior[email]": {email: true},
+        "junior[age]": {required: true}
+      }
+    });
+  
       }
     });
     e.preventDefault();

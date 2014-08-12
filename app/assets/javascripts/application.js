@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.sticky
+//= require jquery.validate.min
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
