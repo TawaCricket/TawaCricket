@@ -11,12 +11,13 @@ TawaCricketClub::Application.routes.draw do
 
   resources :member
 
+  resources :admin
+
   resources :juniors
 
   resources :seniors
 
   get "images/gallery"
-
 
   resources :image_tables
 
