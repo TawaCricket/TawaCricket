@@ -13,7 +13,7 @@
   <div>
    <%= render 'layouts/header' %>
 </div>
-  <div class="container">
+  <div class="container" style="width:800px">
     <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String) %>
       <%- end -%>  
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div id ="bg">
-    <%= image_tag("bg.jpg", :alt => "backgroup image") %>
+    <%= image_tag("bg.jpg", :alt => "background image") %>
   </div>
   </body>
   

@@ -2,7 +2,8 @@
 
 .gallerycontainer{
 position: relative;
-width:1000px;
+width:800px;
+left: 13%;
 
 /*Add a height attribute and set to largest image's height to prevent overlaying*/
 }
@@ -40,25 +41,27 @@ height: 400px;
 }
 
 .thumbnail:hover span{ /*CSS for enlarged image*/
+position: absolute;
 visibility: visible;
-top: 0;
-left: 200px; /*position where enlarged image should offset horizontally */
+top: 10%;
+top: middle;
+left: 20%; /*position where enlarged image should offset horizontally */
 z-index: 50;
 width: 700px;
 height: 400px;
 }
 
 </style>
-<h1>Gallery</h1>
-
-<div class="gallerycontainer">
+<h1 align="center">Gallery</h1>
+</br>
+<div class="gallerycontainer" style="width:800px">
 
 <table id = "myTable">
 <% @images.in_groups_of(3,false).each do |group| %>
 	<tr>
 		<% group.each do |img| %>
 			<td> 
-				<a class="thumbnail" href="#thumb"><%= image_tag img.pic.url, :style=>  'width:300px;height:300px'%><span><%= image_tag img.pic.url %> </span></a>
+				<a class="thumbnail" href="#thumb"><%= image_tag img.pic.url, :style=>  'width:300px;height:250px'%><span><%= image_tag img.pic.url %> </span></a>
 			</td>
 		<%end%>
 	</tr>
