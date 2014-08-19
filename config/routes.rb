@@ -1,7 +1,6 @@
 TawaCricketClub::Application.routes.draw do
 
 
-
   get '/juniors/new_form' => "juniors#new_form"
   get '/senior/new_form' => "senior#new_form"
 
@@ -14,6 +13,8 @@ TawaCricketClub::Application.routes.draw do
   resources :juniors
 
   resources :seniors
+
+  resources :contact
 
   get "images/gallery"
 
