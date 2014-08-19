@@ -1,0 +1,27 @@
+<h1>Contact Us</h1>
+
+
+
+
+<%= @error_msg%>
+<br/>
+<%= form_for @contact, :id => 'contacts_form' do |f| %>
+<table>
+	<tr>
+  		<td> <%= f.label :name, "Enter your Full Name:" %></td>
+  		<td> <%= f.text_field :name, :placeholder => "Enter your Name" %></td><br/>
+  </tr>
+  		<tr>
+  			<td><%= f.label :email, "Enter your Email Address:" %></td>
+  			<td><%= f.email_field :email, :placeholder => "Something@domain.com" %><br/></td>
+  		</tr>
+  	<tr>	
+  		<td><%= f.label :question, "Enter your Question:" %> <br/></td>
+  		<td><%= f.text_area :question, :size => "50x10" %>   <br/></td>
+  	</tr>
+  	</table>
+  	<div class = "actions">
+  <%= f.submit "Ask Question" %> 
+  </div>	
+<% end %>
+	

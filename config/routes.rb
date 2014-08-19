@@ -14,10 +14,9 @@ TawaCricketClub::Application.routes.draw do
 
   resources :seniors
 
-  resources :contact
+  resources :contacts
 
   get "images/gallery"
-
 
   resources :image_tables
 
@@ -29,6 +28,7 @@ TawaCricketClub::Application.routes.draw do
 
   match 'juniors/create' => 'juniors#create', :via => [:post]
   match 'senior/create' => 'senior#create', :via => [:post]
+
 
 
 
