@@ -7,6 +7,11 @@ class AdminController < ApplicationController
 	end
 
 	def save
-
+		
+		respond_to do |format|
+    	    format.html { redirect_to root, notice: 'Succesfully saved changes.' }
+        	format.json { head :no_content }
+      	end
 	end
+
 end

@@ -31,6 +31,7 @@ TawaCricketClub::Application.routes.draw do
  
   root 'member#index'
 
+  match 'admin/save' => 'admin#save', :via => [:post]
   match 'juniors/create' => 'juniors#create', :via => [:post]
   match 'senior/create' => 'senior#create', :via => [:post]
 
