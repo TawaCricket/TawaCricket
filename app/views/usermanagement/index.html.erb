@@ -1,0 +1,25 @@
+<h1>Member Listing</h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Memeber Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usermanagements.each do |usermanagement| %>
+      <tr>
+        <td><%= usermanagement.first_name %>
+        <%= usermanagement.last_name %></td>
+      <td><%= link_to 'Edit', edit_member_registration_path%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
+     
