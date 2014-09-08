@@ -48,8 +48,9 @@
 <% if !@teams.nil? %>
  <% @teams.each do |team| %>
   <ul id="<%= team.id %>" class="connectedSortable sortable1">
+    
  	<% @juniors.where(:team_id => team.id).each do |junior| %>
-      <li id="<%=junior.id%>" class="ui-state-highlight"><%=junior.first_name%> <%=junior.last_name%></li>
+    <li id="<%=junior.id%>" class="ui-state-highlight"><%=junior.first_name%> <%=junior.last_name%></li>
  	<% end %>
 
   <%# @senior.where(:team_id => team.id).each do |junior| %>
