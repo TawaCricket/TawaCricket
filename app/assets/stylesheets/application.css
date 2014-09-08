@@ -19,6 +19,7 @@
   top: 30px;
   transform: translateY(-50%);
 }
+
   #bg {
       position:fixed; 
       top:-50%; 
@@ -37,8 +38,8 @@
       min-height:50%;
     }
     
-    #page-wrap { position: relative; z-index: 2; width: 1100px; margin: 50px auto; 
-    	padding: 20px; background: white; opacity: 0.92; -moz-box-shadow: 0 0 20px black;
+    #page-wrap { position: relative; z-index: 2; width: 880px; margin: 50px auto; 
+    	padding: 20px; background: white; opacity: 0.95; -moz-box-shadow: 0 0 20px black;
     	 -webkit-box-shadow: 0 0 20px black; box-shadow: 0 0 20px black; }
     p { font: 15px/2 Georgia, Serif; margin: 0 0 30px 0; text-indent: 40px; }
 
@@ -68,4 +69,8 @@ h2 {
 p {
   font-size: 1.1em;
   line-height: 1.7em;
+}
+#select{
+  width: 130px;
+  text-indent: 15px; 
 }

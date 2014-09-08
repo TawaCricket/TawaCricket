@@ -12,6 +12,7 @@ class ImagesController < ApplicationController
   def show
   end
 
+
   def gallery
     @images = Image.all
   end

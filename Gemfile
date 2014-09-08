@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 
 gem  'paperclip', :git => "git://github.com/thoughtbot/paperclip.git" #For images
+
 #gem "paperclip", "~> 2.3"
 gem 'devise'
 gem "therubyracer"

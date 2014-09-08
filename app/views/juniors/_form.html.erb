@@ -9,18 +9,29 @@
   	<td><%= f.text_field :last_name, required: true, placeholder: "Last name"%></td>
   </tr>
   <tr>
-  	<td><%= f.label :Address, "Address"%></td>
+  	<td><%= f.label :address, "Address"%></td>
   	<td><%= f.text_field :address, required: true, placeholder: "Address"%></td>
   </tr>
   <tr>
   	<td><%= f.label :email, "Email"%></td>
   	<td><%= f.text_field :email, required: true, placeholder: "Email"%></td>
   </tr>
+  <span id="select"><tr>
+    <td><%= f.label :dob, "Date of Birth"%></td>
+    <td><%= f.date_select :dob,{:use_month_numbers => true,:order => [:day, :month, :year] ,:start_year => 1980 } %></td>
+  </tr></span>
   <tr>
-  	<td><%= f.label :age, "Age"%></td>
-  	<td><%= f.text_field :age, required: true, placeholder: "Age"%></td>
+    <td><%= f.label :gender, "Gender"%></td>
+    <td><%= f.select :gender, [['Female', "Female"],['Male', "Male"]], :include_blank =>'Gender'%></td>
+  </tr>
+    <tr>
+    <td><%= f.label :school, "School"%></td>
+    <td><%= f.text_field :school, required: true, placeholder: "School"%></td>
+  </tr>
+    <tr>
+      <td><%= f.label :current_school_year, "School Year"%></td>
+
+    <td><%= f.select :current_school_year,(0..8), :include_blank =>'Year at School'%></td>
   </tr>
 </table>
-<button id="save">add junior</button>
 <% end %>
-

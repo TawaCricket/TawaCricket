@@ -1,29 +1,160 @@
+<div class="span 9">
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %></div>
-
-  <div><%= f.submit "Update" %></div>
-  
-<% end %>
-
+<div id="new-junior"></div>
+<div id="new-senior"></div>
+<button id="save-junior" class="pull-left">add junior</button>
+<button id="load-junior">load junior form</button>
+<button id="save-senior">add senior</button>
+<button id="load-senior">load senior form</button>
+</br>
+</br>
+ <div class="span2">
+  <h3>Update my account</h3>
+ <%= render 'form' %>
+ <%= link_to "Back", :back %>
+</div>
+<div class="span2"></div>
+<div class="span3">
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+</div>
 
-<%= link_to "Back", :back %>
+</div>
+
+
+
+<script style="text/javascript">
+$(document).ready(function(){
+  $('#load-junior').show();
+  $('#save-junior').hide();
+
+  $('#load-senior').show();
+  $('#save-senior').hide();
+
+
+  $("#sticker").sticky({topSpacing:0})
+
+  $('#save-junior').on('click', function(e) {
+    var formData = $('#new_junior').serialize();
+    alert($('#new_junior').valid());
+    if($('#new_junior').valid()){
+      $.ajax('<%= juniors_create_path %>', {
+        type: 'POST',
+        dataType: "JSON",
+        data: formData,
+        success: function(data, textStatus, jqXHR) 
+        {
+          $('#load-junior').show();
+          $('#save-junior').hide();
+
+          alert('success'); //data: return data from server
+          
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+          alert('failure'); //if fails      
+        }
+      });
+    }
+    e.preventDefault();
+    return false;
+  });
+
+  $('#load-junior').on('click', function(e) {
+
+    var data;
+    $.ajax({
+      type: "GET",
+      url: '/juniors/new_form',
+      dataType: "JSON",
+      success: function(data) {
+        console.log('success');
+        $('#save-junior').show();
+        $('#load-junior').hide();
+        $('#new-junior').append(data);
+      },
+      error: function(data){
+        $('#save-junior').show();
+        $('#load-junior').hide();
+        $('#new-junior').append(data.responseText);
+
+        $('#new_junior').validate({
+      debug: true,
+      rules: {
+        "junior[first_name]": {required: true, maxlength: 20},
+        "junior[last_name]": {required: true, maxlength: 20},
+        "junior[address]": {required:true},
+        "junior[email]": {email: true},
+        "junior[age]": {required: true}
+      }
+    });
+  
+      }
+    });
+    e.preventDefault();
+    return false;
+  });
+
+
+
+  $('#save-senior').on('click', function(e) {
+    var formData = $('#new_senior').serialize();
+    alert($('#new_senior').valid());
+    if($('#new_senior').valid()){
+      $.ajax('/senior/create', {
+        type: 'POST',
+        dataType: "JSON",
+        data: formData,
+        success: function(data, textStatus, jqXHR) 
+        {
+          $('#load-senior').show();
+          $('#save-senior').hide();
+
+          alert('success'); //data: return data from server
+          
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+          alert('failure'); //if fails      
+        }
+      });
+    }
+    e.preventDefault();
+    return false;
+  });
+
+  $('#load-senior').on('click', function(e) {
+
+    var data;
+    $.ajax({
+      type: "GET",
+      url: '/senior/new_form',
+      dataType: "JSON",
+      success: function(data) {
+        console.log('success');
+        $('#save-senior').show();
+        $('#load-senior').hide();
+        $('#new-senior').append(data);
+      },
+      error: function(data){
+        $('#save-senior').show();
+        $('#load-senior').hide();
+        $('#new-senior').append(data.responseText);
+
+        $('#new_senior').validate({
+      debug: true,
+      rules: {
+        "senior[position]": {required: true, maxlength: 10},
+        "senior[grade]": {required: true},
+      }
+    });
+  
+      }
+    });
+    e.preventDefault();
+    return false;
+  });
+});
+</script>
