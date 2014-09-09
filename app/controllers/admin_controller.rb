@@ -1,30 +1,26 @@
 class AdminController < ApplicationController
 	def index
+
+	end
+
+	def filter
 		@volunteers = Member.where(:volunteer => true)
 		@juniors = Junior.all
 		@seniors = Senior.all
 		@teams = Team.all
-		print "\n"
-		print @teams
-		print "\n"
+
+		respond_to do |format|
+    	    format.html { render :partial => 'teams', :layout => false }
+    	    format.json { head :no_content }
+      	end
 	end
 
 	def save
 		@players = params[:players]
 		@players.each do |player|
-			print "\n"
-			print player
-			print "\n"
-			print player[1]
-			print "\n"
-			print player[1][:player]
-			print "\n"
-			print player[1][:team]
-			print "\n"
 			@some = Junior.find(player[1][:player])
 			@some.team_id = player[1][:team]
 			@some.save
-			print "\n"
 		end
 		
 		respond_to do |format|

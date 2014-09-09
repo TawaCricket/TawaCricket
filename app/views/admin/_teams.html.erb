@@ -1,0 +1,77 @@
+<head>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+
+  <script type="text/javascript">
+
+$(function() {
+  $( ".sortable1, .sortable2" ).sortable({
+    connectWith: ".connectedSortable"
+  }).disableSelection();
+});
+
+$('#save_changes').click(function(){
+  var listsToSubmit = ($("ul[class^='connectedSortable']")).toArray();
+  var dataToSubmit = [  ];
+  for(var i = 0; i < listsToSubmit.length; i++){
+    var elems = listsToSubmit[i].getElementsByTagName("li");
+    for(var j = 0; j < elems.length; j++){
+      dataToSubmit.push({"player": elems[j].id, "team": listsToSubmit[i].id.replace('sortable', '')});
+    }
+  }
+
+  var data = {"players": dataToSubmit};
+
+  $.ajax('/admin/save', {
+        type: 'POST',
+        dataType: "JSON",
+        data: data,
+        success: function(data, textStatus, jqXHR) 
+        {
+          alert('success'); //data: return data from server 
+        },
+        error: function(jqXHR, textStatus, errorThrown) 
+        {
+          alert('failure'); //if fails      
+        }
+      });
+  });
+</script>
+</head>
+<body>
+<!-- for all volunteers not in a team -->
+<ul id="-1" class="connectedSortable sortable1">
+</ul>
+<!-- for all juniors not yet in a team -->
+<ul id="-1" class="connectedSortable sortable2">
+ <% @juniors.where(:team_id => -1).each do |junior| %>
+ 	<li id="<%=junior.id%>" class="ui-state-highlight"><%=junior.first_name%> <%=junior.last_name%></li>
+ <% end %>
+  <% @seniors.where(:team_id => -1).each do |senior| %>
+ <% end %>
+</ul>
+ <!-- for each player or volunteer in a team -->
+<% if !@teams.nil? %>
+ <% @teams.each do |team| %>
+  <ul id="<%= team.id %>" class="connectedSortable sortable1">
+    
+ 	<% @juniors.where(:team_id => team.id).each do |junior| %>
+    <li id="<%=junior.id%>" class="ui-state-highlight"><%=junior.first_name%> <%=junior.last_name%></li>
+ 	<% end %>
+
+  <%# @senior.where(:team_id => team.id).each do |junior| %>
+
+  <%# end %>
+
+  <%# @volunteers.where(:team_id => team.id).each do |volunteer| %>
+  
+  <%# end %>
+  
+  </ul>
+
+ <% end %>
+<% end %>
+  <button id="save_changes" class="btn btn-primary">Save changes</button>
+</body>
+
+
