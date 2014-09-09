@@ -32,7 +32,7 @@
 <script>  
 
   $(document).on('ready', function(){
-
+    //year is manadatory
     function filterData(year, school, fmale_only, senior, position){
     $.ajax('/admin/filter', {
       type: 'POST',
