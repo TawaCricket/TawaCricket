@@ -33,8 +33,6 @@
  <!-- for all volunteers not in a team -->
 <ul id="-1" class="connectedSortable sortable1">
 </ul>
-
-
  <!-- for all juniors not yet in a team -->
 <ul id="-1" class="connectedSortable sortable2">
  <% @juniors.where(:team_id => -1).each do |junior| %>
@@ -44,6 +42,7 @@
 
  <% end %>
 </ul>
+
  <!-- for each player or volunteer in a team -->
 <% if !@teams.nil? %>
  <% @teams.each do |team| %>
@@ -99,6 +98,7 @@
         }
       });
   });
+
 
 </script>
 

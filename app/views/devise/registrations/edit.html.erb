@@ -16,6 +16,8 @@
 </div>
 <div class="span2"></div>
 <div class="span3">
+  <h4> List all junior players here</h4>
+
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
@@ -38,6 +40,7 @@ $(document).ready(function(){
 
   $('#save-junior').on('click', function(e) {
     var formData = $('#new_junior').serialize();
+    //document.getElementById("#junior_form").clear();
     alert($('#new_junior').valid());
     if($('#new_junior').valid()){
       $.ajax('<%= juniors_create_path %>', {
@@ -48,6 +51,7 @@ $(document).ready(function(){
         {
           $('#load-junior').show();
           $('#save-junior').hide();
+         window.location.reload(true);
 
           alert('success'); //data: return data from server
           
@@ -56,6 +60,7 @@ $(document).ready(function(){
         {
           alert('failure'); //if fails      
         }
+
       });
     }
     e.preventDefault();
