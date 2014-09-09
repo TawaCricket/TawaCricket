@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140819015208) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140819015208) do
     t.integer  "grade_last_season"
     t.integer  "current_school_year"
     t.boolean  "girls_only"
+    t.integer  "team_id",             default: -1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,16 +89,25 @@ ActiveRecord::Schema.define(version: 20140819015208) do
   end
 
   create_table "seniors", force: true do |t|
-    t.integer  "member_id",  default: 0, null: false
+    t.integer  "member_id",  default: 0,  null: false
     t.string   "position"
+    t.integer  "team_id",    default: -1
     t.integer  "grade"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  create_table "teams", force: true do |t|
+    t.string   "name"
+    t.integer  "coach"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "volunteers", force: true do |t|
-    t.integer  "member_id",  default: 0, null: false
+    t.integer  "member_id",  default: 0,  null: false
     t.string   "position"
+    t.integer  "team_id",    default: -1
     t.datetime "created_at"
     t.datetime "updated_at"
   end

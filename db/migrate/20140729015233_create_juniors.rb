@@ -13,6 +13,7 @@ class CreateJuniors < ActiveRecord::Migration
       t.integer :grade_last_season
       t.integer :current_school_year
       t.boolean :girls_only
+      t.integer :team_id, default: -1
       t.datetime :created_at
       t.datetime :updated_at
       t.timestamps

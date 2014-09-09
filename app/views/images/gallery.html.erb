@@ -3,7 +3,6 @@
 .gallerycontainer{
 position: relative;
 width:800px;
-left: 13%;
 
 /*Add a height attribute and set to largest image's height to prevent overlaying*/
 }
@@ -46,9 +45,6 @@ z-index: 50;
 width: 70%;
 height: 80%;
 background-color: white;
-
-
-
 }
 
 </style>
@@ -58,6 +54,7 @@ background-color: white;
 
 <table id = "myTable">
 <% @images.in_groups_of(3,false).each do |group| %>
+
     <tr>
         <% group.each do |img| %>
             <td> 
