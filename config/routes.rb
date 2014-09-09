@@ -1,6 +1,5 @@
 TawaCricketClub::Application.routes.draw do
 
-
   get "teams/new"
   get "teams/edit"
 
@@ -18,7 +17,6 @@ TawaCricketClub::Application.routes.draw do
   resources :juniors
 
   resources :seniors
-
 
   resources :teams
 
