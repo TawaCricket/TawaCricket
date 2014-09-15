@@ -1,7 +1,5 @@
 TawaCricketClub::Application.routes.draw do
 
-
-
   get "teams/new"
   get "teams/edit"
 
@@ -20,9 +18,9 @@ TawaCricketClub::Application.routes.draw do
 
   resources :seniors
 
-  resources :contacts
-
   resources :teams
+
+  resources :contacts
 
   get "images/gallery"
 
@@ -35,6 +33,7 @@ TawaCricketClub::Application.routes.draw do
   root 'member#index'
 
   match 'admin/save' => 'admin#save', :via => [:post]
+  match 'admin/filter' => 'admin#filter', :via => [:post]
   match 'juniors/create' => 'juniors#create', :via => [:post]
   match 'senior/create' => 'senior#create', :via => [:post]
 

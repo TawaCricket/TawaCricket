@@ -18,9 +18,9 @@ def create
       end
 	end
 
-def team_params
+  def team_params
 		params.require(:team).permit(:name)
-    end
+  end
 
   def edit
   end

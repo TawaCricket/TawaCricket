@@ -1,12 +1,14 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
-     <div class="container">
+     <div class="container" style="width:100%">
        <div>
          <ul class="nav nav-bar-height center-nav ">
            <li><%= link_to "TawaCricket", root_path %></li>
            <li><%= link_to "Gallery", images_gallery_path %></li>
            <li><%= link_to "Register", new_member_registration_path %></li>
            <li><%= link_to "Contact", contacts_path %></li>
+           <li><%= link_to "Admin", "/admin" %></li>
+           <li><%= link_to "Create Team", "/teams/new" %></li>
          </ul>
          <ul class="nav nav-bar-height center-nav" style="float:right">
          <li>

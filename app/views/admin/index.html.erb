@@ -19,84 +19,39 @@
     width: 120px;
   }
   </style>
-  <script>
-  $(function() {
-    $( ".sortable1, .sortable2" ).sortable({
-      connectWith: ".connectedSortable"
-    }).disableSelection();
-  });
 
-  </script>
 </head>
-<body>
 
- <!-- for all volunteers not in a team -->
-<ul id="-1" class="connectedSortable sortable1">
-</ul>
- <!-- for all juniors not yet in a team -->
-<ul id="-1" class="connectedSortable sortable2">
- <% @juniors.where(:team_id => -1).each do |junior| %>
- 	<li id="<%=junior.id%>" class="ui-state-highlight"><%=junior.first_name%> <%=junior.last_name%></li>
- <% end %>
-  <% @seniors.where(:team_id => -1).each do |senior| %>
+<div id="teams">
 
- <% end %>
-</ul>
 
- <!-- for each player or volunteer in a team -->
-<% if !@teams.nil? %>
- <% @teams.each do |team| %>
-  <ul id="<%= team.id %>" class="connectedSortable sortable1">
-    
- 	<% @juniors.where(:team_id => team.id).each do |junior| %>
-    <li id="<%=junior.id%>" class="ui-state-highlight"><%=junior.first_name%> <%=junior.last_name%></li>
- 	<% end %>
-
-  <%# @senior.where(:team_id => team.id).each do |junior| %>
-
-  <%# end %>
-
-  <%# @volunteers.where(:team_id => team.id).each do |volunteer| %>
-  
-  <%# end %>
-  
-  </ul>
- <% end %>
-<% end %>
-  <button id="save_changes" class="btn btn-primary">Save changes</button>
-
-</body>
+</div>
 
 </html>
 
 <script>  
 
-  $('#save_changes').click( function(){
-    var listsToSubmit = ($("ul[class^='connectedSortable']")).toArray();
-
-    var dataToSubmit = [  ];
-    for(var i = 0; i < listsToSubmit.length; i++){
-      var elems = listsToSubmit[i].getElementsByTagName("li");
-      for(var j = 0; j < elems.length; j++){
-        dataToSubmit.push({"player": elems[j].id, "team": listsToSubmit[i].id.replace('sortable', '')});
+  $(document).on('ready', function(){
+    //year is manadatory
+    function filterData(year, school, fmale_only, senior, position){
+    $.ajax('/admin/filter', {
+      type: 'POST',
+      data: {"year": year , "school": school, "female_only": fmale_only, "senior": senior, "position":position},
+      success: function(data, textStatus, jqXHR) 
+      {
+        $('#teams').empty();
+        $('#teams').append(data);
+        alert('success'); //data: return data from server 
+      },
+      error: function(jqXHR, textStatus, errorThrown) 
+      {
+        alert('failure'); //if fails      
       }
-    }
+    });
+  }
 
-    var data = {"players": dataToSubmit};
+  filterData("1", "", "", "", "");
 
-    $.ajax('/admin/save', {
-        type: 'POST',
-        dataType: "JSON",
-        data: data,
-        success: function(data, textStatus, jqXHR) 
-        {
-          alert('success'); //data: return data from server 
-        },
-        error: function(jqXHR, textStatus, errorThrown) 
-        {
-          alert('failure'); //if fails      
-        }
-      });
   });
 
 
