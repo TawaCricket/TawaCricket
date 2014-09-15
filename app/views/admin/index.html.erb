@@ -29,30 +29,31 @@
 </html>
 
 <script>  
-
-  $(document).on('ready', function(){
-    //year is manadatory
-    function filterData(year, school, fmale_only, senior, position){
-    $.ajax('/admin/filter', {
-      type: 'POST',
-      data: {"year": year , "school": school, "female_only": fmale_only, "senior": senior, "position":position},
-      success: function(data, textStatus, jqXHR) 
-      {
-        $('#teams').empty();
-        $('#teams').append(data);
-        alert('success'); //data: return data from server 
-      },
-      error: function(jqXHR, textStatus, errorThrown) 
-      {
-        alert('failure'); //if fails      
-      }
-    });
-  }
-
-  filterData("1", "", "", "", "");
-
+jQuery(function($) {
+  return $(document).on("ready", function() {
+    var filterData;
+    filterData = function(year, school, fmale_only, senior, position) {
+      $.ajax("/admin/filter", {
+        type: "POST",
+        data: {
+          year: year,
+          school: school,
+          female_only: fmale_only,
+          senior: senior,
+          position: position
+        },
+        success: function(data, textStatus, jqXHR) {
+          $("#teams").empty();
+          $("#teams").append(data);
+          alert("success");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          alert("failure");
+        }
+      });
+    };
+    filterData("1", "", "", "", "");
   });
-
-
+});
 </script>
 

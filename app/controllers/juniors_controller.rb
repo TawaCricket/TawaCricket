@@ -47,7 +47,6 @@ class JuniorsController < ApplicationController
 
 	def destroy
 		#@junior.destroy
-
 		respond_to do |format|
       		format.html { redirect_to root }
       		format.json { head :no_content }
@@ -55,6 +54,6 @@ class JuniorsController < ApplicationController
 	end
 
   	def junior_params
-		params.require(:junior).permit(:first_name, :last_name, :address, :email, :age)
+		params.require(:junior).permit(:first_name, :last_name, :address, :email, :gender, :school, :dob, :grade_last_season, :current_school_year, :girls_only)
     end
 end
