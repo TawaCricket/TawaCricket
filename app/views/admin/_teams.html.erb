@@ -37,6 +37,7 @@ $('#save_changes').click(function(){
       });
   });
 </script>
+
 </head>
 <body>
 <!-- for all volunteers not in a team -->
@@ -46,8 +47,6 @@ $('#save_changes').click(function(){
 <ul id="-1" class="connectedSortable sortable2">
  <% @juniors.where(:team_id => -1).each do |junior| %>
  	<li id="<%=junior.id%>" class="ui-state-highlight"><%=junior.first_name%> <%=junior.last_name%></li>
- <% end %>
-  <% @seniors.where(:team_id => -1).each do |senior| %>
  <% end %>
 </ul>
  <!-- for each player or volunteer in a team -->

@@ -41,18 +41,17 @@ ActiveRecord::Schema.define(version: 20140819015208) do
   end
 
   create_table "juniors", force: true do |t|
-    t.integer  "member_id",           default: 0,  null: false
-    t.string   "first_name",          default: "", null: false
-    t.string   "last_name",           default: "", null: false
+    t.integer  "member_id",           default: 0,     null: false
+    t.string   "first_name",          default: "",    null: false
+    t.string   "last_name",           default: "",    null: false
     t.string   "address"
     t.string   "email"
     t.string   "gender"
-    t.integer  "age"
     t.date     "dob"
     t.string   "school"
     t.integer  "grade_last_season"
     t.integer  "current_school_year"
-    t.boolean  "girls_only"
+    t.boolean  "girls_only",          default: false
     t.integer  "team_id",             default: -1
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -99,6 +98,8 @@ ActiveRecord::Schema.define(version: 20140819015208) do
   create_table "teams", force: true do |t|
     t.string   "name"
     t.integer  "coach"
+    t.integer  "age_group"
+    t.boolean  "female_only"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
