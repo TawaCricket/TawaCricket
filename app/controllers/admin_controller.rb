@@ -1,6 +1,8 @@
 class AdminController < ApplicationController
 	def index
-
+		@juniors = Junior.all
+		@seniors = Senior.all
+		@teams = Team.all
 	end
 
 	def filter
