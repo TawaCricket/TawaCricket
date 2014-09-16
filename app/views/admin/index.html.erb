@@ -21,12 +21,11 @@
   </style>
 
 </head>
-
+<body>
+  <%= select_tag('juniors', options_for_select(juniors.all.collect { |s| s.name })) %>
 <div id="teams">
-
-
 </div>
-
+</body>
 </html>
 
 <script>  
