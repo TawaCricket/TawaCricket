@@ -54,6 +54,6 @@ class JuniorsController < ApplicationController
 	end
 
   	def junior_params
-		params.require(:junior).permit(:first_name, :last_name, :address, :email, :gender, :school, :dob, :grade_last_season, :current_school_year, :girls_only)
+		params.require(:junior).permit(:first_name, :last_name, :address, :email, :gender, :dob, :grade_last_season, :current_school_year, :girls_only)
     end
 end

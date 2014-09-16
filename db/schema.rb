@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819015208) do
+ActiveRecord::Schema.define(version: 20140915234408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 20140819015208) do
     t.string   "last_name",              default: "", null: false
     t.string   "phone"
     t.string   "mobile"
-    t.boolean  "volunteer"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -105,9 +104,12 @@ ActiveRecord::Schema.define(version: 20140819015208) do
   end
 
   create_table "volunteers", force: true do |t|
-    t.integer  "member_id",  default: 0,  null: false
-    t.string   "position"
-    t.integer  "team_id",    default: -1
+    t.integer  "junior_id"
+    t.string   "name"
+    t.integer  "grade"
+    t.string   "contact"
+    t.string   "description"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
