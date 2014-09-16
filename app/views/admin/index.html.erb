@@ -29,8 +29,8 @@
 </html>
 
 <script>  
-jQuery(function($) {
-  return $(document).on("ready", function() {
+
+ $(document).ready(once(function() {
     var filterData;
     filterData = function(year, school, fmale_only, senior, position) {
       $.ajax("/admin/filter", {
@@ -52,8 +52,11 @@ jQuery(function($) {
         }
       });
     };
+
+
+
     filterData("1", "", "", "", "");
-  });
-});
+  }));
+
 </script>
 
