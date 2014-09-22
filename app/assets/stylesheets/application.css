@@ -81,3 +81,7 @@ body{
   width: 130px;
   text-indent: 15px; 
 }
+
+.container{
+  width: 80%;
+}
