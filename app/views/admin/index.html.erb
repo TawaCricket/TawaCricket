@@ -22,7 +22,12 @@
 
 </head>
 <body>
-  <%= select_tag('juniors', options_for_select(juniors.all.collect { |s| s.name })) %>
+ <select id"year">
+  <option value="1">Year 1</option>
+  <option value="2">Year 2</option>
+  <option value="3">Year 3</option>
+  <option value="4">Year 4</option>
+</select>
 <div id="teams">
 </div>
 </body>
@@ -31,6 +36,9 @@
 <script>  
 
  $(document).ready(once(function() {
+   $('#year').bind('Click',function(e){
+    var year = $(this).val();
+  }
     var filterData;
     filterData = function(year, school, fmale_only, senior, position) {
       $.ajax("/admin/filter", {
@@ -55,7 +63,7 @@
 
 
 
-    filterData("1", "", "", "", "");
+    filterData(year, "", "", "", "");
   }));
 
 </script>
