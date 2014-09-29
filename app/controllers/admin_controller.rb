@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
 	def index
-		
+		@teams = Team.all
 	end
 
 	def populate_teams

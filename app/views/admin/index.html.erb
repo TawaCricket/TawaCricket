@@ -22,16 +22,40 @@
 
 </head>
 <body>
+
+ <select id="yearDropDown" onchange="runFilter()">
+  <option value="1">Year 1</option>
+  <option value="2">Year 2</option>
+  <option value="3">Year 3</option>
+  <option value="4">Year 4</option>
+</select>
+Female Only: <input type="checkbox" id="femaleCheck" onchange="runFilter()">
+Senior Player<input type="checkbox" id="seniorCheck" onchange="runFilter()">
+
 <div id="teams">
+
 </div>
 </body>
 </html>
 
 <script>  
 
+function runFilter(){
+
+var yearDocument = document.getElementById("yearDropDown");
+var yearDropDownValue = yearDocument.options[yearDocument.selectedIndex].value;
+
+//what is senior getting saved as? true falce, 1,0 or string??
+
+filterData(yearDropDownValue,"",femaleCheck.checked,"","");
+}
+
  $(document).ready(once(function() {
-    var filterData;
-    filterData = function(year, school, fmale_only, senior, position) {
+ 
+    filterData(1, "", "", "", "");
+  }));
+
+     var filterData = function(year, school, fmale_only, senior, position) {
       $.ajax("/admin/filter", {
         type: "POST",
         data: {
@@ -51,9 +75,6 @@
         }
       });
     };
-    
-    filterData("1", "", "", "", "");
-  }));
 
 </script>
 
