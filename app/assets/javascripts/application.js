@@ -11,10 +11,22 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.sticky
 //= require jquery.validate.min
+//= require jquery-sortable
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
 
+once = function(func) {
+  var ran = false, memo;
+  return function() {
+    if (ran) return memo;
+    ran = true;
+    memo = func.apply(this, arguments);
+    func = null;
+    return memo;
+  };
+};

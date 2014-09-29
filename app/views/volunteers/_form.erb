@@ -1,0 +1,20 @@
+<%= form_for @volunteer, :id => 'volunteer_form' do |f| %>
+    <table>
+      <tr>
+        <td><%= f.label :name, "Volunteer Name" %></td>
+        <td><%= f.text_field :name, required: true, placeholder: "Volunteer Name" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :contact, "Contact#" %></td>
+        <td><%= f.text_field :contact, required: true, placeholder: "Contact#" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :description, "Tell us about yourself" %></td>
+        <td><%= f.text_field :description, required: false, placeholder: "Optional" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :email, "Email" %></td>
+        <td><%= f.text_field :email, required: true, placeholder: "Email" %></td>
+      </tr>
+    </table>
+<% end %>

@@ -1,0 +1,19 @@
+<%= form_for @team, :id => 'team_form' do |f|%>
+<table>
+  <tr>
+  	<td><%= f.label :name, "Team Name"%></td>
+  	<td><%= f.text_field :name, required: true, placeholder: "Team Name"%></td>
+  </tr>
+    <tr>
+  	<td><%= f.label :age_group, "Age group"%></td>
+  	<td><%= f.select :age_group,(0..8), :include_blank =>'Age group'%></td>
+  </tr>
+  <tr>
+  	<td><%= f.label :female_only, "Female only?"%></td>
+  	<td><%= f.check_box :female_only %></td>
+  </tr>
+</table>
+ <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

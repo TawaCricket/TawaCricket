@@ -1,160 +1,188 @@
-<div class="span 9">
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2 style="margin-right: auto; margin-left: auto">Edit <%= resource_name.to_s.humanize %></h2>
 
-<div id="new-junior"></div>
-<div id="new-senior"></div>
-<button id="save-junior" class="pull-left">add junior</button>
-<button id="load-junior">load junior form</button>
-<button id="save-senior">add senior</button>
-<button id="load-senior">load senior form</button>
-</br>
-</br>
- <div class="span2">
-  <h3>Update my account</h3>
- <%= render 'form' %>
- <%= link_to "Back", :back %>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#junior-tab" id="junior-tab-id" role="tab" data-toggle="tab">Juniors</a></li>
+  <li><a href="#register-junior-tab" id="register-junior-tab-id" role="tab" data-toggle="tab">Register Junior</a></li>
+  <li><a href="#senior-tab" role="tab" data-toggle="tab">Senior</a></li>
+  <li><a href="#register-senior-tab" id="register-senior-tab-id" role="tab" data-toggle="tab">Register Senior</a></li>
+  <li><a href="#update-account" role="tab" data-toggle="tab">Update my account</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="junior-tab">
+    <div id="junior-table-content"></div>
+  </div>
+  <div class="tab-pane" id="register-junior-tab">
+    <div id="new-junior-form"></div>
+    <button id="save-junior" class="pull-left">add junior</button>
+  </div>
+  <div class="tab-pane" id="senior-tab">...</div>
+  <div class="tab-pane" id="register-senior-tab">
+    <div id="new-senior-form"></div>
+    <button id="save-senior" class="pull-left">add senior</button>
+  </div>
+  <div class="tab-pane" id="update-account">
+
+    <div class="span2">
+      <h3>Update my account</h3>
+      <%= render 'form' %>
+      <%= link_to "Back", :back %>
+    </div>
+    <div class="span2"></div>
+    <div class="span3">
+      <h3>Cancel my account</h3>
+
+      <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: {confirm: "Are you sure?"}, method: :delete %></p>
+
+    </div>
+
+  </div>
+
+  <script>
+
+      $(document).ready(once(function () {
+          $("#sticker").sticky({
+              topSpacing: 0
+          });
+
+          $("#junior-tab-id").on("click", function (e) {
+              var data;
+              data = void 0;
+              $('#junior-table-content').html('');
+
+              $.ajax({
+                  type: "GET",
+                  url: "/juniors/get_all_juniors",
+                  dataType: "JSON",
+                  success: function (data) {
+                      $("#junior-table-content").append(data);
+                  },
+                  error: function (data) {
+                      $("#junior-table-content").append(data.responseText);
+                  }
+              });
+          });
+
+          $("#junior-tab-id").click();
+
+          $("#save-junior").on("click", function (e) {
+              var formData;
+
+              formData = $("#new_junior").serialize();
+              if ($("#new_junior").valid()) {
+                  $.ajax("<%= juniors_create_path %>", {
+                      type: "POST",
+                      dataType: "JSON",
+                      data: formData,
+                      success: function (data, textStatus, jqXHR) {
+                          $("#new-junior-form").html("<p>Junior successfully added. Would you like to add <a href='#' onclick=$('#register-junior-tab-id').click(); return false>Another?</a></p>");
+                      },
+                      error: function (jqXHR, textStatus, errorThrown) {
+                      }
+                  });
+              }
+              e.preventDefault();
+              return false;
+          });
+
+          $("#register-junior-tab-id").on("click", function (e) {
+              var data;
+              data = void 0;
+              $('#new-junior-form').html('');
+
+              $.ajax({
+                  type: "GET",
+                  url: "/juniors/new_form",
+                  dataType: "JSON",
+                  success: function (data) {
+                      $("#new-junior-form").append(data);
+                  },
+                  error: function (data) {
+
+                      $("#new-junior-form").append(data.responseText);
+
+                  }
+              });
+
+              $("#new_junior").validate({
+                  rules: {
+                      "junior[first_name]": {
+                          required: true,
+                          maxlength: 20
+                      },
+                      "junior[last_name]": {
+                          required: true,
+                          maxlength: 20
+                      },
+                      "junior[address]": {
+                          required: true
+                      },
+                      "junior[email]": {
+                          email: true
+                      },
+                      "junior[age]": {
+                          required: true
+                      }
+                  }
+              });
+          });
+
+          $("#save-senior").on("click", function (e) {
+              var formData;
+              formData = $("#new_senior").serialize();
+              if ($("#new_senior").valid()) {
+                  $.ajax("/senior/create", {
+                      type: "POST",
+                      dataType: "JSON",
+                      data: formData,
+                      success: function (data, textStatus, jqXHR) {
+                          $("#new-senior-form").html("<p>Senior successfully created. Would you like to add <a href='#' onclick=$('#register-senior-tab-id').click(); return false>Another?</a></p>");
+                      },
+                      error: function (jqXHR, textStatus, errorThrown) {
+
+                      }
+                  });
+              }
+              e.preventDefault();
+              return false;
+          });
+
+          $("#register-senior-tab-id").on("click", function (e) {
+              var data;
+              data = void 0;
+
+              $('#new-senior-form').html('');
+
+              $.ajax({
+                  type: "GET",
+                  url: "/senior/new_form",
+                  dataType: "JSON",
+                  success: function (data) {
+                      $("#new-senior-form").append(data);
+                  },
+                  error: function (data) {
+                      $("#new-senior-form").append(data.responseText);
+
+                  }
+              });
+
+              $("#new_senior").validate({
+                  debug: true,
+                  rules: {
+                      "senior[position]": {
+                          required: true,
+                          maxlength: 10
+                      },
+                      "senior[grade]": {
+                          required: true
+                      }
+                  }
+              });
+          });
+      }));
+
+  </script>
 </div>
-<div class="span2"></div>
-<div class="span3">
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 </div>
-
-</div>
-
-
-
-<script style="text/javascript">
-$(document).ready(function(){
-  $('#load-junior').show();
-  $('#save-junior').hide();
-
-  $('#load-senior').show();
-  $('#save-senior').hide();
-
-
-  $("#sticker").sticky({topSpacing:0})
-
-  $('#save-junior').on('click', function(e) {
-    var formData = $('#new_junior').serialize();
-    alert($('#new_junior').valid());
-    if($('#new_junior').valid()){
-      $.ajax('<%= juniors_create_path %>', {
-        type: 'POST',
-        dataType: "JSON",
-        data: formData,
-        success: function(data, textStatus, jqXHR) 
-        {
-          $('#load-junior').show();
-          $('#save-junior').hide();
-
-          alert('success'); //data: return data from server
-          
-        },
-        error: function(jqXHR, textStatus, errorThrown) 
-        {
-          alert('failure'); //if fails      
-        }
-      });
-    }
-    e.preventDefault();
-    return false;
-  });
-
-  $('#load-junior').on('click', function(e) {
-
-    var data;
-    $.ajax({
-      type: "GET",
-      url: '/juniors/new_form',
-      dataType: "JSON",
-      success: function(data) {
-        console.log('success');
-        $('#save-junior').show();
-        $('#load-junior').hide();
-        $('#new-junior').append(data);
-      },
-      error: function(data){
-        $('#save-junior').show();
-        $('#load-junior').hide();
-        $('#new-junior').append(data.responseText);
-
-        $('#new_junior').validate({
-      debug: true,
-      rules: {
-        "junior[first_name]": {required: true, maxlength: 20},
-        "junior[last_name]": {required: true, maxlength: 20},
-        "junior[address]": {required:true},
-        "junior[email]": {email: true},
-        "junior[age]": {required: true}
-      }
-    });
-  
-      }
-    });
-    e.preventDefault();
-    return false;
-  });
-
-
-
-  $('#save-senior').on('click', function(e) {
-    var formData = $('#new_senior').serialize();
-    alert($('#new_senior').valid());
-    if($('#new_senior').valid()){
-      $.ajax('/senior/create', {
-        type: 'POST',
-        dataType: "JSON",
-        data: formData,
-        success: function(data, textStatus, jqXHR) 
-        {
-          $('#load-senior').show();
-          $('#save-senior').hide();
-
-          alert('success'); //data: return data from server
-          
-        },
-        error: function(jqXHR, textStatus, errorThrown) 
-        {
-          alert('failure'); //if fails      
-        }
-      });
-    }
-    e.preventDefault();
-    return false;
-  });
-
-  $('#load-senior').on('click', function(e) {
-
-    var data;
-    $.ajax({
-      type: "GET",
-      url: '/senior/new_form',
-      dataType: "JSON",
-      success: function(data) {
-        console.log('success');
-        $('#save-senior').show();
-        $('#load-senior').hide();
-        $('#new-senior').append(data);
-      },
-      error: function(data){
-        $('#save-senior').show();
-        $('#load-senior').hide();
-        $('#new-senior').append(data.responseText);
-
-        $('#new_senior').validate({
-      debug: true,
-      rules: {
-        "senior[position]": {required: true, maxlength: 10},
-        "senior[grade]": {required: true},
-      }
-    });
-  
-      }
-    });
-    e.preventDefault();
-    return false;
-  });
-});
-</script>
