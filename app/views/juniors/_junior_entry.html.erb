@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne<%= player.id %>">
+        <a data-toggle="collapse" id="collapseOne<%= player.id %>-id" data-parent="#accordion" href="#collapseOne<%= player.id %>">
           <%= player.first_name + ' ' + player.last_name %>
         </a>
       </h4>
@@ -24,7 +24,7 @@
             topSpacing: 0
         });
 
-        $("#submit-volunteer-form-<%=player.id%>").on("click", function (e) {
+        $("#collapseOne<%= player.id %>-id").on("click", function (e) {
             var formData;
 
             formData = $("#new_volunteer");
