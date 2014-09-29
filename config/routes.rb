@@ -2,6 +2,10 @@ TawaCricketClub::Application.routes.draw do
 
 
 
+  get "payment/index"
+  get 'paypal_express/checkout'
+  get "paypal_express/review"
+  
   get '/juniors/new_form' => "juniors#new_form"
   get '/senior/new_form' => "senior#new_form"
 

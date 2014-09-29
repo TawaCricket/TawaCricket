@@ -1,0 +1,14 @@
+defaults: &defaults
+  login: malhotanku1_api2.myvuw.ac.nz
+  password: NTPU2W56452Y45ZJ
+  signature: AQfJLkWyov4JIADCYQ9m42fPnDqLAIvg5RNP8arQ15z4or5l0JlSGlPt
+ 
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
