@@ -20,7 +20,7 @@ module AdminHelper
 		players.where(:school => school)
 	end
 
-	def populate_teams_helper
+	def populate_teams_helper(teamSize)
 
 		#for each year
 
@@ -43,7 +43,7 @@ module AdminHelper
 
 			children = children1 + children2
 
-			size = children.count
+			children = children.uniq(&:id)
 
 			if !children.nil?
 				children.each do |child|
@@ -54,8 +54,45 @@ module AdminHelper
 
 			girls = girls - children
 
-		end
+			count = children.count
 
+			while count <= teamSize
+
+				if girls.count = 0
+					break
+				end
+
+				new_players = girls.where(:friend_id => children.id)
+
+				if new_players.count = 0 
+					school = girls.where(:school => find_most_common_school(children))
+					new_players.push(school.pop)
+				end
+
+				if new_players.count = 0
+					new_players.push(girls.pop)
+				end
+
+				if !new_players.nil?
+					new_players.each do |child|
+						child.team_id = team.id
+					end
+					new_players.each(&:save)
+				end
+
+				new_players = new_players.uniq(&:id)
+
+				children = children + new_players
+
+				children = children.uniq(&:id)
+
+				girls = girls - new_players
+
+				count = children.count
+
+			end
+
+		end
 
 		#for each year
 			#for each team in that year that isn't girls only

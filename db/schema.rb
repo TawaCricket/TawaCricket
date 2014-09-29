@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140915234408) do
+ActiveRecord::Schema.define(version: 20140922221612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 20140915234408) do
     t.string   "name"
     t.string   "email"
     t.string   "question"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "friends_mappings", force: true do |t|
+    t.integer  "member_id"
+    t.integer  "junior_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -106,7 +113,7 @@ ActiveRecord::Schema.define(version: 20140915234408) do
   create_table "volunteers", force: true do |t|
     t.integer  "junior_id"
     t.string   "name"
-    t.integer  "grade"
+    t.integer  "year"
     t.string   "contact"
     t.string   "description"
     t.string   "email"
