@@ -4,7 +4,13 @@ TawaCricketClub::Application.routes.draw do
   get "teams/edit"
 
   get '/juniors/new_form' => "juniors#new_form"
+  get '/volunteers/new_form' => "volunteers#new_form"
+  get '/teams/new_form' => "teams#new_form"
   get '/senior/new_form' => "senior#new_form"
+  get '/teams/get_all_teams' => "teams#get_all_teams"
+
+
+  get '/juniors/get_all_juniors' => "juniors#get_all_juniors"
 
   devise_for :members
 
@@ -17,6 +23,8 @@ TawaCricketClub::Application.routes.draw do
   resources :juniors
 
   resources :seniors
+
+  resources :volunteers
 
   resources :teams
 
@@ -35,6 +43,8 @@ TawaCricketClub::Application.routes.draw do
   match 'admin/save' => 'admin#save', :via => [:post]
   match 'admin/filter' => 'admin#filter', :via => [:post]
   match 'juniors/create' => 'juniors#create', :via => [:post]
+  match 'juniors/get_juniors' => 'juniors#get_juniors', :via => [:post]
+  match 'volunteers/create' => 'volunteers#create', :via => [:post]
   match 'senior/create' => 'senior#create', :via => [:post]
 
 

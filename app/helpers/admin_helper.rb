@@ -1,116 +1,110 @@
 module AdminHelper
 
-	def get_friends(player, all_players)
-		friends_mappings = @friends.find(:junior_id => players.id)
-		friends = players.find(:junior_id => friends_mapping.friend_id)
-		friends
-	end
+  def populate_teams_helper()
 
-	def find_most_common_school(players)
-		#don't know if this will work
-		common = players.all(
-  			:group  => "school",
-  			:select => "school, COUNT(school) as count"
-		).order(:count).limit(1)
+    #for each year
 
-		common.school
-	end
+    [1, 2, 3, 4, 5, 6, 7].each do |year|
 
-	def get_players_by_school(school, players)
-		players.where(:school => school)
-	end
+      juniors = @juniors.where(:girls_only => false)
+      juniors = juniors.where(:current_school_year => year)
 
-	def populate_teams_helper(teamSize)
+      teams = @teams.where(:female_only => false)
+      teams = teams.where(:age_group => year)
 
-		#for each year
+      volunteers = @volunteers.where(:junior_id => juniors.all { |x| x.id })
 
-		girls = @juniors.where(:girls_only => true)
-		girls_only_teams = @teams.where(:girls_only => true)
-		girls_only_volunteers = @volunteers.find(:member_id => girls.member_id)
+      #if total number of teams * max size is less then players create additional teams.
+      if (teams.length * 12 < juniors.length)
+        difference = juniors.length - teams.length * 12
+        difference = difference / 12
+        count = 0;
 
-		girls_only_teams.each do |team|
+        while count < difference
 
-			volunteer1 = girls_only_volunteers.pop
-			volunteer2 = girls_only_volunteers.pop
+          team = Team.new
+          team.age_group = year
+          team.female_only = false
+          team.name = "something"
 
-			volunteer1.team_id = team.id
-			volunteer2.team_id = team.id
+          team.save
 
-			size = 0
+          teams.put(team)
 
-			children1 = girls.find(:member_id => volunteer1.member_id)
-			children2 = girls.find(:member_id => volunteer2.member_id)
+        end
 
-			children = children1 + children2
+      end
 
-			children = children.uniq(&:id)
+      teams.each do |team|
 
-			if !children.nil?
-				children.each do |child|
-					child.team_id = team.id
-				end
-				children.each(&:save)
-			end
+        if juniors.empty?
+          break
+        end
 
-			girls = girls - children
+        team_members = []
+        team_volunteers = []
+        team_size = 0
 
-			count = children.count
+        if !volunteers.empty?
 
-			while count <= teamSize
+          team_size = 1
 
-				if girls.count = 0
-					break
-				end
+          team_volunteers.push(volunteers.pop())
+          team_volunteers.push(volunteers.pop())
 
-				new_players = girls.where(:friend_id => children.id)
+          #we can assume that if they're volunteering they have a child that we can assign.
+          #if they're already in a team we just remove them, it's more important that they go with their family member anyway.
 
-				if new_players.count = 0 
-					school = girls.where(:school => find_most_common_school(children))
-					new_players.push(school.pop)
-				end
+          team_members.push(juniors.where(:junior_id => team_volunteers[0].junior_id))
+          if volunteers.length > 2
+            team_size += 1
+            team_members.push(juniors.where(:junior_id => team_volunteers[1].junior_id))
+          end
 
-				if new_players.count = 0
-					new_players.push(girls.pop)
-				end
+          school_mates = []
+          team_members.each do |m|
+            school_mates = school_mates + juniors.where(:school => 'victoria')
+          end
 
-				if !new_players.nil?
-					new_players.each do |child|
-						child.team_id = team.id
-					end
-					new_players.each(&:save)
-				end
+          count = 0
+          #try to fill the team with school_mates
+          while count < school_mates.length && team_size < 12
 
-				new_players = new_players.uniq(&:id)
+            team_members.push(school_mates.pop())
+            team_size += 1
+            count += 1
 
-				children = children + new_players
+          end
 
-				children = children.uniq(&:id)
+          count = 0
+          #if not full add random players
+          if team_size < 12
+            while count < juniors.length && team_size < 12
+              team_members.push(juniors.pop())
+              team_size += 1
+              count += 1
+            end
+          end
 
-				girls = girls - new_players
+          team_members.each do |m|
+            print m
+            print "\n"
+          end
 
-				count = children.count
+          team_volunteers.each do |v|
+            print v
+            print "\n"
+          end
 
-			end
+          #still need to actually assign these players to their respective teams
+          #but this should work.
 
-		end
+          #because they're now part of a team
+          volunteers = volunteers - team_volunteers
+          juniors = juniors - team_members
 
-		#for each year
-			#for each team in that year that isn't girls only
-				#for each volunteer not in a team
-					#add volunteer/s to team
-					#add their children to the same team
-					#for each junior in that year 
-						#if they're friends add to team
-					#for each junior in that year 
-						# if they're in the same school add them to the same team
-				#fill remaining spaces randomly (as they don't have any friends or school mates).
-			
-			#for each senior team
-				#assign randomly at this stage...
-
-		#if there are additional players left need to decide if we create a team for them
-		#or of we just leave them un-assigned
-
-	end
-
+        end
+      end
+    end
+  end
 end

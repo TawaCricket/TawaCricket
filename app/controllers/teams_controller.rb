@@ -4,6 +4,16 @@ class TeamsController < ApplicationController
   end
 def show
   @team = Team.all
+end
+
+  def get_all_teams
+    @teams = Team.all
+    render :partial => 'team_table', :layout => false
+  end
+
+  def new_form
+    @team = Team.new
+    render :partial => 'form', :layout => false
   end
 def create
 	  @team = Team.new(team_params)
@@ -19,7 +29,7 @@ def create
 	end
 
   def team_params
-		params.require(:team).permit(:name)
+		params.require(:team).permit(:name, :female_only, :age_group)
   end
 
   def edit

@@ -26,3 +26,7 @@
 .idea/scopes/scope_settings.xml
 .idea/vcs.xml
 .idea/workspace.xml
+.idea/runConfigurations/Development__TawaCricket.xml
+.idea/runConfigurations/Production__TawaCricket.xml
+.idea/runConfigurations/spec__TawaCricket.xml
+.idea/runConfigurations/test__TawaCricket.xml

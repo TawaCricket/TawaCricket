@@ -1,0 +1,42 @@
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" id="team-collapse-toggle-id-<%=team.id%>" data-parent="#accordion" href="#team-collapse-<%=team.id%>">
+          <%='Name: ' + team.name + ', Grade: ' + team.age_group.to_s%>
+        </a>
+      </h4>
+    </div>
+    <div id="team-collapse-<%=team.id%>" class="panel-collapse collapse in">
+      <div class="panel-body">
+
+
+        <div id="team-form-content-<%=team.id%>"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(once(function () {
+        $("#sticker").sticky({
+            topSpacing: 0
+        });
+
+        $("#team-collapse-toggle-id-<%=team.id%>").on("click", function (e) {
+
+            $("#team-form-content-<%=team.id%>").html("");
+
+                $.ajax("/juniors/get_juniors?team_id=<%=team.id%>", {
+                    type: "POST",
+                    success: function (data, textStatus, jqXHR) {
+                        $("#team-form-content-<%=team.id%>").append(data)
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                    }
+                });
+            });
+    }));
+
+</script>

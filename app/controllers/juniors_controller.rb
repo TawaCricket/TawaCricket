@@ -36,7 +36,7 @@ class JuniorsController < ApplicationController
 	end
 
 	def get_juniors
-		@juniors = Junior.where(:member_id => current_member.id)
+		@juniors = Junior.where(:team_id => params[:team_id])
 		render :partial => 'junior_table', :layout => false
 	end
 
@@ -54,6 +54,6 @@ class JuniorsController < ApplicationController
 	end
 
   	def junior_params
-		params.require(:junior).permit(:first_name, :last_name, :address, :email, :gender, :dob, :grade_last_season, :current_school_year, :girls_only)
+		  params.require(:junior).permit(:first_name, :last_name, :address, :email, :gender, :dob, :grade_last_season, :current_school_year, :girls_only)
     end
 end

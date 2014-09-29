@@ -1,6 +1,12 @@
 class AdminController < ApplicationController
+  include AdminHelper
 	def index
 		@teams = Team.all
+    @juniors = Junior.all
+    @volunteers = Volunteer.all
+
+    populate_teams_helper()
+
 	end
 
 	def populate_teams

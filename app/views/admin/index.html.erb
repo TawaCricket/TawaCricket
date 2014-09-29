@@ -2,78 +2,126 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
   <style>
-  .sortable1, .sortable2 {
-    border: 1px solid #eee;
-    width: 142px;
-    min-height: 20px;
-    list-style-type: none;
-    margin: 0;
-    padding: 5px 0 0 0;
-    float: left;
-    margin-right: 10px;
-  }
-  .sortable1 li, .sortable2 li {
-    margin: 0 5px 5px 5px;
-    padding: 5px;
-    font-size: 1.2em;
-    width: 120px;
-  }
+      .sortable1, .sortable2 {
+          border: 1px solid #eee;
+          width: 142px;
+          min-height: 20px;
+          list-style-type: none;
+          margin: 0;
+          padding: 5px 0 0 0;
+          float: left;
+          margin-right: 10px;
+      }
+
+      .sortable1 li, .sortable2 li {
+          margin: 0 5px 5px 5px;
+          padding: 5px;
+          font-size: 1.2em;
+          width: 120px;
+      }
   </style>
 
 </head>
 <body>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#teams-tab" id="team-tab-id" role="tab" data-toggle="tab">All teams</a></li>
+  <li><a href="#team-management-tab" id="team-management-tab-id" role="tab" data-toggle="tab">Team management</a></li>
+  <li><a href="#team-create-tab" id="team-create-tab-id" role="tab" data-toggle="tab">Team create</a></li>
+</ul>
 
- <select id="yearDropDown" onchange="runFilter()">
-  <option value="1">Year 1</option>
-  <option value="2">Year 2</option>
-  <option value="3">Year 3</option>
-  <option value="4">Year 4</option>
-</select>
-Female Only: <input type="checkbox" id="femaleCheck" onchange="runFilter()">
-Senior Player<input type="checkbox" id="seniorCheck" onchange="runFilter()">
+<div class="tab-content">
+  <div class="tab-pane active" id="teams-tab"><div id="teams-tab-content"></div></div>
+  <div class="tab-pane" id="team-management-tab">
+    <div>
+      <select id="yearDropDown" onchange="runFilter()">
+        <option value="1">Year 1</option>
+        <option value="2">Year 2</option>
+        <option value="3">Year 3</option>
+        <option value="4">Year 4</option>
+      </select>
 
-<div id="teams">
+      Female Only: <input type="checkbox" id="femaleCheck" onchange="runFilter()">
+      Senior Player<input type="checkbox" id="seniorCheck" onchange="runFilter()">
 
+    </div>
+    <div id="team-management-content"></div>
+  </div>
+  <div class="tab-pane" id="team-create-tab">
+    <div id="team-create-content"></div>
+  </div>
+</div>
 </div>
 </body>
 </html>
 
-<script>  
+<script>
 
-function runFilter(){
+    function runFilter() {
+        $('#team-management-content').html('');
+        var yearDocument = document.getElementById("yearDropDown");
+        var yearDropDownValue = yearDocument.options[yearDocument.selectedIndex].value;
 
-var yearDocument = document.getElementById("yearDropDown");
-var yearDropDownValue = yearDocument.options[yearDocument.selectedIndex].value;
+//what is senior getting saved as? true false, 1,0 or string??
 
-//what is senior getting saved as? true falce, 1,0 or string??
+        filterData(yearDropDownValue, "", femaleCheck.checked, "", "");
+    }
 
-filterData(yearDropDownValue,"",femaleCheck.checked,"","");
-}
+    $(document).ready(once(function () {
+        $('#team-management-tab-id').on("click", function (e) {
+            filterData("1", "", "", "", "");
+        });
 
- $(document).ready(once(function() {
- 
-    filterData(1, "", "", "", "");
-  }));
+        $('#team-create-tab-id').on("click", function(e){
+            $("#team-create-content").html('');
+            $.ajax({
+                type: "GET",
+                url: "/teams/new_form",
+                dataType: "JSON",
+                success: function (data) {
+                    $("#team-create-content").append(data);
+                },
+                error: function (data) {
+                    $("#team-create-content").append(data.responseText);
+                }
+            });
+        });
 
-     var filterData = function(year, school, fmale_only, senior, position) {
-      $.ajax("/admin/filter", {
-        type: "POST",
-        data: {
-          year: year,
-          school: school,
-          female_only: fmale_only,
-          senior: senior,
-          position: position
-        },
-        success: function(data, textStatus, jqXHR) {
-          $("#teams").empty();
-          $("#teams").append(data);
-          alert("success");
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          alert("failure");
-        }
-      });
+        $('#team-tab-id').on("click", function(e){
+            $("#teams-tab-content").html('');
+            $.ajax({
+                type: "GET",
+                url: "/teams/get_all_teams",
+                dataType: "JSON",
+                success: function (data) {
+                    $("#teams-tab-content").append(data);
+                },
+                error: function (data) {
+                    $("#teams-tab-content").append(data.responseText);
+                }
+            });
+        });
+        $('#team-tab-id').click();
+    }));
+
+    var filterData = function (year, school, fmale_only, senior, position) {
+        $('#team-management-content').html('');
+        $.ajax("/admin/filter", {
+            type: "POST",
+            data: {
+                year: year,
+                school: school,
+                female_only: fmale_only,
+                senior: senior,
+                position: position
+            },
+            success: function (data, textStatus, jqXHR) {
+                $("#team-management-content").append(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
     };
 
 </script>
