@@ -11,6 +11,8 @@
       <div class="panel-body">
         <div id="volunteer-form-content-<%= player.id %>"></div>
         <button id="load-volunteer-form-<%= player.id %>">Volunteer?</button>
+        <button id="load-edit-form-<%= player.id %>">Edit</button>
+        <button id="save-edit-form-<%= player.id %>">Save</button>
         <button id="submit-volunteer-form-<%= player.id %>">Submit</button>
         <button id="cancel-load-volunteer-form-<%= player.id %>">Cancel?</button>
       </div>
@@ -65,6 +67,43 @@
                 }
             });
         });
+
+        $('#load-edit-form-<%=player.id%>').on("click", function (e) {
+            $("#volunteer-form-content-<%=player.id%>").html('');
+                $.ajax("/juniors/update_form?junior_id=<%=player.id%>", {
+                    type: "POST",
+                    success: function (data, textStatus, jqXHR) {
+                        $("#volunteer-form-content-<%=player.id%>").append(data);
+                        
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+                e.preventDefault();
+            return false;
+        });
+
+            $('#save-edit-form-<%=player.id%>').on("click", function (e) {
+            var formData;
+            formData = $("#edit_junior_<%=player.id%>").serialize();
+            $("#volunteer-form-content-<%=player.id%>").html('');
+                $.ajax("/juniors/update?junior_id=<%=player.id%>", {
+                    type: "POST",
+                    dataType: "JSON", 
+                    data: formData,
+                    success: function (data, textStatus, jqXHR) {
+                        $("#junior-tab-id").click();
+                        
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                     
+                    }
+                });
+                e.preventDefault();
+            return false;
+        });
+
     }));
 
 </script>

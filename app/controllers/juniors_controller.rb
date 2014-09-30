@@ -20,6 +20,20 @@ class JuniorsController < ApplicationController
       	end
       end
 	end
+	def update
+		@junior = Junior.where(:id => params[:junior_id]).first
+
+ 	  respond_to do |format|
+      	if @junior.update(junior_params)
+        	format.html { redirect_to @junior, notice: 'Junior was successfully updated.' }
+        	format.json { head :no_content }
+      	else
+        	format.html { render action: 'edit' }
+        	format.json { render json: @junior.errors, status: :unprocessable_entity }
+      	end
+      end
+	end
+
 
 	def new
 		@junior = Junior.new
@@ -31,7 +45,7 @@ class JuniorsController < ApplicationController
 	end
 
 	def update_form
-		@juniors = Junior.where(:junior_id => @junior.id)
+		@junior = Junior.where(:id => params[:junior_id]).first
 		render :partial => 'form', :layout => false
 	end
 

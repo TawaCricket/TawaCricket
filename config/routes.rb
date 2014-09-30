@@ -16,6 +16,8 @@ TawaCricketClub::Application.routes.draw do
 
   get '/juniors/get_all_juniors' => "juniors#get_all_juniors"
 
+
+
   devise_for :members
 
   resources :members
@@ -50,7 +52,8 @@ TawaCricketClub::Application.routes.draw do
   match 'juniors/get_juniors' => 'juniors#get_juniors', :via => [:post]
   match 'volunteers/create' => 'volunteers#create', :via => [:post]
   match 'senior/create' => 'senior#create', :via => [:post]
-
+  match 'juniors/update_form' => 'juniors#update_form', :via => [:post]
+  match 'juniors/update' => 'juniors#update', :via => [:post]
 
 
 
