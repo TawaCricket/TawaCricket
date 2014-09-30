@@ -28,10 +28,14 @@
   <li class="active"><a href="#teams-tab" id="team-tab-id" role="tab" data-toggle="tab">All teams</a></li>
   <li><a href="#team-management-tab" id="team-management-tab-id" role="tab" data-toggle="tab">Team management</a></li>
   <li><a href="#team-create-tab" id="team-create-tab-id" role="tab" data-toggle="tab">Team create</a></li>
+  <li><a href="#auto-team-create-tab" id="auto-team-create-tab-id" role="tab" data-toggle="tab">Auto generate teams</a>
+  </li>
 </ul>
 
 <div class="tab-content">
-  <div class="tab-pane active" id="teams-tab"><div id="teams-tab-content"></div></div>
+  <div class="tab-pane active" id="teams-tab">
+    <div id="teams-tab-content"></div>
+  </div>
   <div class="tab-pane" id="team-management-tab">
     <div>
       <select id="yearDropDown" onchange="runFilter()">
@@ -49,6 +53,12 @@
   </div>
   <div class="tab-pane" id="team-create-tab">
     <div id="team-create-content"></div>
+  </div>
+  <div class="tab-pane" id="auto-team-create-tab">
+    <h2>Generate teams</h2>
+    <h4>Note these teams may not be optimal</h4>
+    <div id="auto-team-create-content"></div>
+    <button id="auto-team-generate">generate?</button>
   </div>
 </div>
 </div>
@@ -72,7 +82,21 @@
             filterData("1", "", "", "", "");
         });
 
-        $('#team-create-tab-id').on("click", function(e){
+        $('#auto-team-generate').on("click", function (e) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/generate",
+                dataType: "JSON",
+                success: function (data) {
+                    $("#auto-team-create-content").html("Success");
+                },
+                error: function (data) {
+                    // $("#team-create-content").append(data.responseText);
+                }
+            });
+        });
+
+        $('#team-create-tab-id').on("click", function (e) {
             $("#team-create-content").html('');
             $.ajax({
                 type: "GET",
@@ -87,7 +111,7 @@
             });
         });
 
-        $('#team-tab-id').on("click", function(e){
+        $('#team-tab-id').on("click", function (e) {
             $("#teams-tab-content").html('');
             $.ajax({
                 type: "GET",

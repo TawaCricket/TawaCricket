@@ -4,10 +4,20 @@ class AdminController < ApplicationController
 		@teams = Team.all
     @juniors = Junior.all
     @volunteers = Volunteer.all
+  end
 
-    populate_teams_helper()
+  def generate
+    @teams = Team.all
+    @juniors = Junior.all
+    @volunteers = Volunteer.all
+    populate_teams_helper
 
-	end
+    respond_to do |format|
+      format.html { redirect_to root, notice: 'Succesfully saved changes.' }
+      format.json { head :no_content }
+    end
+
+  end
 
 	def populate_teams
 		@teams = Team.all

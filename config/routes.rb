@@ -8,6 +8,7 @@ TawaCricketClub::Application.routes.draw do
   get "paypal_express/review"
   
   get '/juniors/new_form' => "juniors#new_form"
+  get '/admin/generate' => "admin#generate"
   get '/volunteers/new_form' => "volunteers#new_form"
   get '/teams/new_form' => "teams#new_form"
   get '/senior/new_form' => "senior#new_form"
