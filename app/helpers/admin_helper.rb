@@ -14,6 +14,11 @@ module AdminHelper
 
       volunteers = @volunteers.where(:junior_id => juniors.all { |x| x.id })
 
+      volunteers.each do |un|
+        un.team_id = -2
+        un.save
+      end
+
       #if total number of teams * max size is less then players create additional teams.
       if (teams.length * 12 < juniors.length)
         difference = juniors.length - teams.length * 12
@@ -76,7 +81,6 @@ module AdminHelper
             count += 1
 
           end
-
           count = 0
           #if not full add random players
           if team_size < 12

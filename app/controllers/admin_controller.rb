@@ -7,9 +7,10 @@ class AdminController < ApplicationController
   end
 
   def generate
-    @teams = Team.all
-    @juniors = Junior.all
-    @volunteers = Volunteer.all
+    @season = Season.last
+    @teams = Team.where(season_id: @season.id)
+    @juniors = Junior.where(season_id: @season.id)
+    @volunteers = Volunteer.where(season_id: @season.id)
     populate_teams_helper
 
     respond_to do |format|
@@ -34,8 +35,9 @@ class AdminController < ApplicationController
 	end
 
 	def filter
-		@juniors = Junior.all
+
     @season = Season.last
+    @juniors = Junior.where(:season_id => @season.id)
     @teams = Team.where(:season_id => @season.id)
 		if !params[:year].blank?
 			@juniors = @juniors.where("current_school_year = ?", params[:year])
@@ -44,13 +46,10 @@ class AdminController < ApplicationController
 		if !params[:school].blank?
 			@juniors = @juniors.where(:school => params[:school])
 		end 
-		if params[:fmale_only].blank?
-			@juniors = @juniors.where(:gender => "f")
-      @teams = @teams.where(:female_only => "f")
+		if !params[:fmale_only].blank?
+			@juniors = @juniors.where(:gender => params[:fmale_only])
+      @teams = @teams.where(:female_only => params[:fmale_only])
 			#we only want teams where all the members are female.
-    else
-      @juniors = @juniors.where(:gender => "t")
-      @teams = @teams.where(:female_only => "t")
 		end 
 
 		if !params[:senior].blank?
@@ -61,9 +60,7 @@ class AdminController < ApplicationController
 			end 
 		end 
 
-
-		@volunteers = Member.where(:volunteer => true)
-
+		@volunteers = Volunteer.where(:season_id => @season.id)
 
 		respond_to do |format|
     	    format.html { render :partial => 'teams', :layout => false }

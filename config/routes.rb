@@ -14,7 +14,7 @@ TawaCricketClub::Application.routes.draw do
   get '/senior/new_form' => "senior#new_form"
   get '/teams/get_all_teams' => "teams#get_all_teams"
   get '/seasons/new_form' => "seasons#new_form"
-
+  get '/contacts/all_contacts' => "contacts#all_contacts"
 
   get '/juniors/get_all_juniors' => "juniors#get_all_juniors"
 

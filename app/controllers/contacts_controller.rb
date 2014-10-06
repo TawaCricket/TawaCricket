@@ -9,7 +9,7 @@ def new
 end
 
 def all_contacts
-  @contact = Junior.all
+  @contact = Contact.all
   render :partial => 'all', :layout => false
 end
 

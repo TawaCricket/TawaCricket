@@ -30,6 +30,7 @@
   <li><a href="#team-create-tab" id="team-create-tab-id" role="tab" data-toggle="tab">Team create</a></li>
   <li><a href="#auto-team-create-tab" id="auto-team-create-tab-id" role="tab" data-toggle="tab">Auto generate teams</a></li>
   <li><a href="#new-season-tab" id="new-season-tab-id" role="tab" data-toggle="tab">Start new season</a></li>
+  <li><a href="#all-contacts-tab" id="all-contacts-tab-id" role="tab" data-toggle="tab">All questions</a></li>
 </ul>
 
 <div class="tab-content">
@@ -55,7 +56,7 @@
     <div id="team-create-content"></div>
   </div>
   <div class="tab-pane" id="auto-team-create-tab">
-    <h2>Generate teams</h2>
+    <h3>Generate teams</h3>
     <h4>Note these teams may not be optimal</h4>
     <div id="auto-team-create-content"></div>
     <button id="auto-team-generate">generate?</button>
@@ -64,6 +65,9 @@
     <h4>Warning this will stop the current season, meaning that everyone will need to re-register</h4>
     <h5>It is also permanent, so make sure this is what you want to do.</h5>
     <div id="new-season-content"></div>
+  </div>
+  <div class="tab-pane" id="all-contacts-tab">
+    <div id="all-contacts-content"></div>
   </div>
 </div>
 </div>
@@ -131,10 +135,8 @@
             });
         });
 
-        $('#new-season-tab-id').click();
-
         $('#new-season-tab-id').on("click", function (e) {
-            $("#new-season-tab-content").html('');
+            $("#new-season-content").html('');
             $.ajax({
                 type: "GET",
                 url: "/seasons/new_form",
@@ -147,6 +149,23 @@
                 }
             });
         });
+
+
+        $('#all-contacts-tab-id').on("click", function (e) {
+            $("#all-contacts-tab-content").html('');
+            $.ajax({
+                type: "GET",
+                url: "/contacts/all_contacts",
+                dataType: "JSON",
+                success: function (data) {
+                    $("#all-contacts-content").append(data);
+                },
+                error: function (data) {
+                    $("#all-contacts-content").append(data.responseText);
+                }
+            });
+        });
+
         $('#team-tab-id').click();
     }));
 

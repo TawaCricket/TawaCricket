@@ -9,11 +9,11 @@ class JuniorsController < ApplicationController
 	end
 
 	def create
-    @senior = Senior.last
+    @season = Season.last
 
 	  @junior = Junior.new(junior_params)
 	  @junior.member_id = current_member.id
-    @junior.season_id = @senior.id
+    @junior.season_id = @season.id
 
  	  respond_to do |format|
       	if @junior.save
