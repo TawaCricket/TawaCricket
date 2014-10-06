@@ -3,6 +3,7 @@ class MemberController < ApplicationController
 
 	def index
 		@member = current_member
+		@images = Image.all
 	end
 	def show
 		@member = current_member

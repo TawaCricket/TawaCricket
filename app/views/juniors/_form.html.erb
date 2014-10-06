@@ -22,16 +22,37 @@
   </tr></span>
   <tr>
     <td><%= f.label :gender, "Gender"%></td>
-    <td><%= f.select :gender, [['Female', "Female"],['Male', "Male"]], :include_blank =>'Gender'%></td>
+    <td><%= f.select :gender, [['Female', "Female"],['Male', "Male"]], :include_blank =>'Gender', :id => "gender_select"%></td>
   </tr>
     <tr>
     <td><%= f.label :school, "School"%></td>
     <td><%= f.text_field :school, required: true, placeholder: "School"%></td>
   </tr>
-    <tr>
-      <td><%= f.label :current_school_year, "School Year"%></td>
-
+  <tr>
+    <td><%= f.label :current_school_year, "School Year"%></td>
     <td><%= f.select :current_school_year,(0..8), :include_blank =>'Year at School'%></td>
   </tr>
+  <tr>
+    <td><%= f.label :grade_last_season, "Grade Last Season"%></td>
+    <td><%= f.select :grade_last_season,(0..8), :include_blank =>'If new leave blank'%></td> 
+  </tr>
+
+  <div id="is_girl" style="display:none">
+    <tr>
+      <td><%= f.label :girls_only, "Girls only?"%></td>
+      <td><%= f.check_box :girls_only%></td> 
+    </tr>
+  </div>
+
 </table>
 <% end %>
+<script>
+$(document).on('ready', function(){
+$('#gender_select').on('blur', function(){
+  if ($('#gender_select').val() == 'Female')
+    $('#is_girl').show();
+  else
+    $('#is_girl').hide();
+});
+});
+</script>

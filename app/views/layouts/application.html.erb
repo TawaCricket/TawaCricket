@@ -3,27 +3,34 @@
 
 <head>
   <title>TawaCricketClub</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+<style type="text/css">
+
+</style>
 
 <body>  
-<div id="page-wrap">
-  <div>
+   <!--  <div id ="bg" style="width:100%">
+    <%= image_tag("bg.jpg", :alt => "background image", :style => "height:auto; ") %>
+  </div> -->
+    <div>
    <%= render 'layouts/header' %>
 </div>
-  <div class="container">
+<div id="page-wrap">
+
+  <div class="container" >
     <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String) %>
       <%- end -%>  
-      <div style="clear:both"></div> 
+      <div style="clear:both">
+      </div> 
       <%= yield %> 
     </div>
   </div>
-  <div id ="bg">
-    <%= image_tag("bg.jpg", :alt => "backgroup image") %>
-  </div>
+
+
   </body>
   
 </html>
