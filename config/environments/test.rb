@@ -1,4 +1,8 @@
 TawaCricketClub::Application.configure do
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+  end
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's

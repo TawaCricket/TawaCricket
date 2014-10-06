@@ -2,6 +2,7 @@ TawaCricketClub::Application.routes.draw do
 
 
 
+  get "paypalexpress/review"
   get "payment/index"
   get 'paypal_express/checkout'
   get "paypal_express/review"
