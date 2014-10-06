@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140930023510) do
     t.integer  "team_id",                    default: -1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "has_paid",                   default: false
   end
 
   create_table "members", force: true do |t|
@@ -90,7 +91,6 @@ ActiveRecord::Schema.define(version: 20140930023510) do
 
   create_table "seasons", force: true do |t|
     t.integer  "year"
-    t.boolean  "current"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

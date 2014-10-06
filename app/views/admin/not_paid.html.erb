@@ -1,0 +1,15 @@
+<h1> Unpaid Members</h1>
+<table>
+<tr>
+<td>Member ID</td>
+<td>Name</td>
+</tr>
+<% @juniors.each do |j|%>
+	<%if j.has_paid == false%>
+		<tr>
+			<td><%=j.member_id%></td>
+			<td><%=j.first_name%></td>
+		</tr>
+	<%end%>
+<%end%>
+</table>

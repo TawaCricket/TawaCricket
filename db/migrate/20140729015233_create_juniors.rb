@@ -19,6 +19,7 @@ class CreateJuniors < ActiveRecord::Migration
       t.integer :team_id, default: -1
       t.datetime :created_at
       t.datetime :updated_at
+      t.boolean :has_paid, default: false
       t.timestamps
     end
   end
