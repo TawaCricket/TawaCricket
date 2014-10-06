@@ -35,16 +35,22 @@ class AdminController < ApplicationController
 
 	def filter
 		@juniors = Junior.all
-
+    @season = Season.last
+    @teams = Team.where(:season_id => @season.id)
 		if !params[:year].blank?
 			@juniors = @juniors.where("current_school_year = ?", params[:year])
+      @teams = @teams.where("age_group = ?", params[:year])
 		end 
 		if !params[:school].blank?
 			@juniors = @juniors.where(:school => params[:school])
 		end 
-		if !params[:fmale_only].blank?
+		if params[:fmale_only].blank?
 			@juniors = @juniors.where(:gender => "f")
+      @teams = @teams.where(:female_only => "f")
 			#we only want teams where all the members are female.
+    else
+      @juniors = @juniors.where(:gender => "t")
+      @teams = @teams.where(:female_only => "t")
 		end 
 
 		if !params[:senior].blank?
@@ -57,7 +63,7 @@ class AdminController < ApplicationController
 
 
 		@volunteers = Member.where(:volunteer => true)
-		@teams = Team.all
+
 
 		respond_to do |format|
     	    format.html { render :partial => 'teams', :layout => false }

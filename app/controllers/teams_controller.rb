@@ -3,11 +3,13 @@ class TeamsController < ApplicationController
   	@team = Team.new
   end
 def show
-  @team = Team.all
+  @season = Season.last
+  @teams = Team.where(season_id: @season.id)
 end
 
   def get_all_teams
-    @teams = Team.all
+    @season = Season.last
+    @teams = Team.where(season_id: @season.id)
     render :partial => 'team_table', :layout => false
   end
 
@@ -17,6 +19,9 @@ end
   end
 def create
 	  @team = Team.new(team_params)
+    @season = Season.last
+    @team.season_id = @season.id
+
  	  respond_to do |format|
       	if @team.save
         	format.html { redirect_to @team, notice: 'Team was successfully updated.' }

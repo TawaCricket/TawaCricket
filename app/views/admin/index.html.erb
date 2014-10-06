@@ -28,8 +28,8 @@
   <li class="active"><a href="#teams-tab" id="team-tab-id" role="tab" data-toggle="tab">All teams</a></li>
   <li><a href="#team-management-tab" id="team-management-tab-id" role="tab" data-toggle="tab">Team management</a></li>
   <li><a href="#team-create-tab" id="team-create-tab-id" role="tab" data-toggle="tab">Team create</a></li>
-  <li><a href="#auto-team-create-tab" id="auto-team-create-tab-id" role="tab" data-toggle="tab">Auto generate teams</a>
-  </li>
+  <li><a href="#auto-team-create-tab" id="auto-team-create-tab-id" role="tab" data-toggle="tab">Auto generate teams</a></li>
+  <li><a href="#new-season-tab" id="new-season-tab-id" role="tab" data-toggle="tab">Start new season</a></li>
 </ul>
 
 <div class="tab-content">
@@ -59,6 +59,11 @@
     <h4>Note these teams may not be optimal</h4>
     <div id="auto-team-create-content"></div>
     <button id="auto-team-generate">generate?</button>
+  </div>
+  <div class="tab-pane" id="new-season-tab">
+    <h4>Warning this will stop the current season, meaning that everyone will need to re-register</h4>
+    <h5>It is also permanent, so make sure this is what you want to do.</h5>
+    <div id="new-season-content"></div>
   </div>
 </div>
 </div>
@@ -122,6 +127,23 @@
                 },
                 error: function (data) {
                     $("#teams-tab-content").append(data.responseText);
+                }
+            });
+        });
+
+        $('#new-season-tab-id').click();
+
+        $('#new-season-tab-id').on("click", function (e) {
+            $("#new-season-tab-content").html('');
+            $.ajax({
+                type: "GET",
+                url: "/seasons/new_form",
+                dataType: "JSON",
+                success: function (data) {
+                    $("#new-season-content").append(data);
+                },
+                error: function (data) {
+                    $("#new-season-content").append(data.responseText);
                 }
             });
         });
