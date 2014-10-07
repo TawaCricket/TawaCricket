@@ -31,6 +31,8 @@
   <li><a href="#auto-team-create-tab" id="auto-team-create-tab-id" role="tab" data-toggle="tab">Auto generate teams</a></li>
   <li><a href="#new-season-tab" id="new-season-tab-id" role="tab" data-toggle="tab">Start new season</a></li>
   <li><a href="#all-contacts-tab" id="all-contacts-tab-id" role="tab" data-toggle="tab">All questions</a></li>
+
+  <li><a href="#unpaid-juniors-tab" id="unpaid-juniors-tab-id" role="tab" data-toggle="tab">Unpaid Juniors</a></li>
 </ul>
 
 <div class="tab-content">
@@ -47,7 +49,7 @@
       </select>
 
       Female Only: <input type="checkbox" id="femaleCheck" onchange="runFilter()">
-      Senior Player<input type="checkbox" id="seniorCheck" onchange="runFilter()">
+      
 
     </div>
     <div id="team-management-content"></div>
@@ -68,6 +70,10 @@
   </div>
   <div class="tab-pane" id="all-contacts-tab">
     <div id="all-contacts-content"></div>
+  </div>
+
+  <div class="tab-pane" id="unpaid-juniors-tab">
+    <div id="unpaid-juniors-content"></div>
   </div>
 </div>
 </div>
@@ -146,6 +152,21 @@
                 },
                 error: function (data) {
                     $("#new-season-content").append(data.responseText);
+                }
+            });
+        });
+
+        $('#unpaid-juniors-tab-id').on("click", function (e) {
+            $("#unpaid-juniors-content").html('');
+            $.ajax({
+                type: "GET",
+                url: "/admin/not_paid",
+                dataType: "JSON",
+                success: function (data) {
+                    $("#unpaid-juniors-content").append(data);
+                },
+                error: function (data) {
+                    $("#unpaid-juniors-content").append(data.responseText);
                 }
             });
         });
