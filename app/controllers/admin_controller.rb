@@ -9,6 +9,7 @@ class AdminController < ApplicationController
   def not_paid
   	@juniors = Junior.all
   	@seniors = Senior.all
+  	render :partial => 'not_paid', :layout => false
   end
 
   def generate
