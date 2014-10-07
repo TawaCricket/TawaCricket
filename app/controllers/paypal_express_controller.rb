@@ -29,9 +29,9 @@ class PaypalExpressController < ApplicationController
       return
     end
 
-     @juniors.has_paid=true;
+     # @juniors.has_paid=true;
  
-    # @order_info = get_order_info gateway_response, @cart
+    
   end
  
 
