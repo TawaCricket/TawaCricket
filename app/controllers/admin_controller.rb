@@ -6,6 +6,11 @@ class AdminController < ApplicationController
     @volunteers = Volunteer.all
   end
 
+  def not_paid
+  	@juniors = Junior.all
+  	@seniors = Senior.all
+  end
+
   def generate
     @season = Season.last
     @teams = Team.where(season_id: @season.id)
