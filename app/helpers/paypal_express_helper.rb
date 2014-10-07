@@ -1,7 +1,7 @@
 module PaypalExpressHelper
 	def get_setup_purchase_params(cart, request)
   
-    }
+    
   end
 
    def get_order_info(gateway_response, cart)
