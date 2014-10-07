@@ -16,6 +16,7 @@ class PaypalExpressController < ApplicationController
   end
 
   def review
+    @juniors=Junior.where(member_id: => current_member.id)
      if params[:token].nil?
       redirect_to root_url, :notice => 'Something went wrong!' 
       return
@@ -27,6 +28,8 @@ class PaypalExpressController < ApplicationController
       redirect_to root_url, :notice => "Something went wrong with the Paypal purchase. Here's what Paypal said: #{gateway_response.message}" 
       return
     end
+
+    juniors.has_paid=true;
  
     # @order_info = get_order_info gateway_response, @cart
   end
