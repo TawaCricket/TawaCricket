@@ -1,5 +1,8 @@
 TawaCricketClub::Application.routes.draw do
 
+#Gmail: tawacricket@gmail.com
+#github: TawaCricket
+#pass: tawacricket123
   get "teams/new"
   get "teams/edit"
 
