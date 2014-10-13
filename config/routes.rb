@@ -45,6 +45,8 @@ TawaCricketClub::Application.routes.draw do
 
   resources :contacts
 
+  resources :usermanagement
+
   get "images/gallery"
 
   resources :image_tables
