@@ -1,0 +1,24 @@
+                List of relations
+ Schema |       Name        |   Type   |  Owner   
+--------+-------------------+----------+----------
+ public | comments          | table    | postgres
+ public | comments_id_seq   | sequence | postgres
+ public | contacts          | table    | postgres
+ public | contacts_id_seq   | sequence | postgres
+ public | images            | table    | postgres
+ public | images_id_seq     | sequence | postgres
+ public | juniors           | table    | postgres
+ public | juniors_id_seq    | sequence | postgres
+ public | members           | table    | postgres
+ public | members_id_seq    | sequence | postgres
+ public | schema_migrations | table    | postgres
+ public | schools           | table    | postgres
+ public | schools_id_seq    | sequence | postgres
+ public | seniors           | table    | postgres
+ public | seniors_id_seq    | sequence | postgres
+ public | teams             | table    | postgres
+ public | teams_id_seq      | sequence | postgres
+ public | volunteers        | table    | postgres
+ public | volunteers_id_seq | sequence | postgres
+(19 rows)
+
