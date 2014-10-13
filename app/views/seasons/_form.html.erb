@@ -1,0 +1,11 @@
+<%= form_for @season, :id => 'season_form' do |f|%>
+    <fieldset>
+      <table>
+        <tr>
+          <td><%= f.label :year, "Year"%></td>
+          <td><%= f.text_field :year, required: true, placeholder: "Enter new year"%></td>
+        </tr>
+      </table>
+    </fieldset>
+    <button>Submit</button>
+<%end%>

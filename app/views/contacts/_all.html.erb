@@ -1,0 +1,7 @@
+<% if !@contact.nil? %>
+<% @contact.each do |contact| %>
+    <p><%=contact.name%></p>
+    <p><%=contact.email%></p>
+    <p><%=contact.question%></p>
+<%end%>
+<%end%>

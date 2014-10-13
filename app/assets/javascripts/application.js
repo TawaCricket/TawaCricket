@@ -17,6 +17,8 @@
 //= require jquery.validate.min
 //= require jquery-sortable
 //= require twitter/bootstrap
+//= require jquery
+//= require fancybox
 //= require turbolinks
 //= require_tree .
 

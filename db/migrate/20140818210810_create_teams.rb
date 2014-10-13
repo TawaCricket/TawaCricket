@@ -5,6 +5,8 @@ class CreateTeams < ActiveRecord::Migration
       t.integer :coach
       t.integer :age_group
       t.boolean :female_only
+      t.integer :season_id, default: -1
+
       t.timestamps
     end
   end

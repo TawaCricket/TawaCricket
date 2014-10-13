@@ -9,9 +9,12 @@ class VolunteersController < ApplicationController
   end
 
   def create
+    print "Made it here \n\n\n\n\n\n"
     @volunteer = Volunteer.new(volunteer_params)
     @volunteer.member_id = current_member.id
     @volunteer.junior_id = params[:junior_id]
+    @season = Season.last
+    @volunteer.season_id = @season.id
 
     respond_to do |format|
       if @volunteer.save

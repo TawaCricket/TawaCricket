@@ -1,7 +1,7 @@
 defaults: &defaults
-  login: malhotanku1_api2.myvuw.ac.nz
-  password: NTPU2W56452Y45ZJ
-  signature: AQfJLkWyov4JIADCYQ9m42fPnDqLAIvg5RNP8arQ15z4or5l0JlSGlPt
+  login: ankur.malhotra7_api5.ymail.com
+  password: C9DT4KTNRZE5BMET
+  signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A2bqOXH-tATGOTcN3F3eHYGutufY
  
 
 development:

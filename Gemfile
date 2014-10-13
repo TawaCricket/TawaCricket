@@ -18,6 +18,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem  'paperclip', :git => "git://github.com/thoughtbot/paperclip.git" #For images
 
+gem 'jquery-rails'
+gem 'fancybox2-rails', '~> 0.2.8'
 
 #gem "paperclip", "~> 2.3"
 gem 'devise'

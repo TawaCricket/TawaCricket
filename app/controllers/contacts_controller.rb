@@ -1,8 +1,17 @@
 class ContactsController < ApplicationController
 
 def index
-@contact=Contact.new
-  end
+  @contact=Contact.new
+end
+
+def new
+  @contact = Contact.new
+end
+
+def all_contacts
+  @contact = Contact.all
+  render :partial => 'all', :layout => false
+end
 
 def create 
   @contact=Contact.new(contact_params)

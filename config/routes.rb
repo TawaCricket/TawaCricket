@@ -1,21 +1,29 @@
 TawaCricketClub::Application.routes.draw do
 
+#Gmail: tawacricket@gmail.com
+#github: TawaCricket
+#pass: tawacricket123
   get "teams/new"
   get "teams/edit"
 
+  get "paypalexpress/review"
   get "payment/index"
   get 'paypal_express/checkout'
   get "paypal_express/review"
   
+  get '/admin/not_paid' => "admin#not_paid"
   get '/juniors/new_form' => "juniors#new_form"
   get '/admin/generate' => "admin#generate"
   get '/volunteers/new_form' => "volunteers#new_form"
   get '/teams/new_form' => "teams#new_form"
   get '/senior/new_form' => "senior#new_form"
   get '/teams/get_all_teams' => "teams#get_all_teams"
-
+  get '/seasons/new_form' => "seasons#new_form"
+  get '/contacts/all_contacts' => "contacts#all_contacts"
 
   get '/juniors/get_all_juniors' => "juniors#get_all_juniors"
+
+
 
   devise_for :members
 
@@ -29,11 +37,15 @@ TawaCricketClub::Application.routes.draw do
 
   resources :seniors
 
+  resources :seasons
+
   resources :volunteers
 
   resources :teams
 
   resources :contacts
+
+  resources :usermanagement
 
   get "images/gallery"
 
@@ -51,7 +63,8 @@ TawaCricketClub::Application.routes.draw do
   match 'juniors/get_juniors' => 'juniors#get_juniors', :via => [:post]
   match 'volunteers/create' => 'volunteers#create', :via => [:post]
   match 'senior/create' => 'senior#create', :via => [:post]
-
+  match 'juniors/update_form' => 'juniors#update_form', :via => [:post]
+  match 'juniors/update' => 'juniors#update', :via => [:post]
 
 
 

@@ -28,7 +28,6 @@ $('#save_changes').click(function(){
         data: data,
         success: function(data, textStatus, jqXHR) 
         {
-          alert('success'); //data: return data from server 
         },
         error: function(jqXHR, textStatus, errorThrown) 
         {
@@ -53,18 +52,17 @@ $('#save_changes').click(function(){
 <% if !@teams.nil? %>
  <% @teams.each do |team| %>
   <ul id="<%= team.id %>" class="connectedSortable sortable1">
+
  	<% @juniors.where(:team_id => team.id).each do |junior| %>
+
     <li id="<%=junior.id%>" class="ui-state-highlight"><%=junior.first_name%> <%=junior.last_name%></li>
  	<% end %>
 
-  <%# @senior.where(:team_id => team.id).each do |junior| %>
-
-  <%# end %>
-
-  <%# @volunteers.where(:team_id => team.id).each do |volunteer| %>
-  
-  <%# end %>
-  
+  <% if !@volunteers.nil? %>
+    <% @volunteers.where(:team_id => team.id).each do |volunteer| %>
+        <li id="<%=volunteer.id%>" class="ui-state-highlight"><%=volunteer.name%> - Volunteer</li>
+    <% end %>
+  <% end %>
   </ul>
 
  <% end %>

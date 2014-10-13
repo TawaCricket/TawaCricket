@@ -1,6 +1,7 @@
 class JuniorsController < ApplicationController
-	def index 
-		@juniors = Junior.all
+	def index
+    @season = Season.last
+		@juniors = Junior.where(:season_id => @season.id)
 	end
 
 	def show
@@ -8,8 +9,12 @@ class JuniorsController < ApplicationController
 	end
 
 	def create
+    @season = Season.last
+
 	  @junior = Junior.new(junior_params)
 	  @junior.member_id = current_member.id
+    @junior.season_id = @season.id
+
  	  respond_to do |format|
       	if @junior.save
         	format.html { redirect_to @junior, notice: 'Junior was successfully updated.' }
@@ -19,7 +24,22 @@ class JuniorsController < ApplicationController
         	format.json { render json: @junior.errors, status: :unprocessable_entity }
       	end
       end
+  end
+
+	def update
+		@junior = Junior.where(:id => params[:junior_id]).first
+
+ 	  respond_to do |format|
+      	if @junior.update(junior_params)
+        	format.html { redirect_to @junior, notice: 'Junior was successfully updated.' }
+        	format.json { head :no_content }
+      	else
+        	format.html { render action: 'edit' }
+        	format.json { render json: @junior.errors, status: :unprocessable_entity }
+      	end
+      end
 	end
+
 
 	def new
 		@junior = Junior.new
@@ -31,7 +51,7 @@ class JuniorsController < ApplicationController
 	end
 
 	def update_form
-		@juniors = Junior.where(:junior_id => @junior.id)
+		@junior = Junior.where(:id => params[:junior_id]).first
 		render :partial => 'form', :layout => false
 	end
 
@@ -41,7 +61,8 @@ class JuniorsController < ApplicationController
 	end
 
 	def get_all_juniors
-		@juniors = Junior.all
+    @season = Season.last
+		@juniors = Junior.where(:season_id => @season.id)
 		render :partial => 'junior_table', :layout => false
 	end
 

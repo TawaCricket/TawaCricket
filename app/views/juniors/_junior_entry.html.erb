@@ -2,15 +2,17 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" id="collapseOne<%= player.id %>-id" data-parent="#accordion" href="#collapseOne<%= player.id %>">
+        <a data-toggle="collapse" id="collapse-player-<%= player.id %>-id" data-parent="#accordion" href="#collapse-player-<%= player.id %>">
           <%= player.first_name + ' ' + player.last_name %>
         </a>
       </h4>
     </div>
-    <div id="collapseOne<%= player.id %>" class="panel-collapse collapse in">
+    <div id="collapse-player-<%= player.id %>" class="panel-collapse collapse in">
       <div class="panel-body">
         <div id="volunteer-form-content-<%= player.id %>"></div>
         <button id="load-volunteer-form-<%= player.id %>">Volunteer?</button>
+        <button id="load-edit-form-<%= player.id %>">Edit</button>
+        <button id="save-edit-form-<%= player.id %>">Save</button>
         <button id="submit-volunteer-form-<%= player.id %>">Submit</button>
         <button id="cancel-load-volunteer-form-<%= player.id %>">Cancel?</button>
       </div>
@@ -24,7 +26,7 @@
             topSpacing: 0
         });
 
-        $("#collapseOne<%= player.id %>-id").on("click", function (e) {
+        $("#submit-volunteer-form-<%= player.id %>").on("click", function (e) {
             var formData;
 
             formData = $("#new_volunteer");
@@ -39,7 +41,7 @@
                         $("#volunteer-form-content-<%=player.id%>").html("<p>Volunteer successfully created.</p>");
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-
+                        $("#volunteer-form-content-<%=player.id%>").html("<p>ERROR.</p>");
                     }
                 });
             }
@@ -65,6 +67,43 @@
                 }
             });
         });
+
+        $('#load-edit-form-<%=player.id%>').on("click", function (e) {
+            $("#volunteer-form-content-<%=player.id%>").html('');
+                $.ajax("/juniors/update_form?junior_id=<%=player.id%>", {
+                    type: "POST",
+                    success: function (data, textStatus, jqXHR) {
+                        $("#volunteer-form-content-<%=player.id%>").append(data);
+                        
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+                e.preventDefault();
+            return false;
+        });
+
+            $('#save-edit-form-<%=player.id%>').on("click", function (e) {
+            var formData;
+            formData = $("#edit_junior_<%=player.id%>").serialize();
+            $("#volunteer-form-content-<%=player.id%>").html('');
+                $.ajax("/juniors/update?junior_id=<%=player.id%>", {
+                    type: "POST",
+                    dataType: "JSON", 
+                    data: formData,
+                    success: function (data, textStatus, jqXHR) {
+                        $("#junior-tab-id").click();
+                        
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                     
+                    }
+                });
+                e.preventDefault();
+            return false;
+        });
+
     }));
 
 </script>
